@@ -25,6 +25,11 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      },
+      "food/create": {
+        "realization": "api/controllers/FoodController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

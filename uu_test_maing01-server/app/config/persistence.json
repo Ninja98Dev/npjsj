@@ -6,6 +6,9 @@
       "schemaMap": {
         "testMain": {
           "realization": "dao/TestMainMongo"
+        },
+        "food": {
+          "realization": "dao/FoodMongo"
         }
       }
     }
