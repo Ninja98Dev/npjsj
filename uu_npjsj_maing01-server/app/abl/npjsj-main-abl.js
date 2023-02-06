@@ -104,7 +104,7 @@ class NpjsjMainAbl {
     // HDS 4 - HDS N
     // TODO Implement according to application needs...
 
-    // HDS N+1
+    // HDS N+1s
     const workspace = UuAppWorkspace.get(awid);
 
     return {
