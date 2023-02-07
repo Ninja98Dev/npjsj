@@ -21,6 +21,7 @@ build/
 public/
 target/
 package-lock.json
+development.json
 node_modules/
 metamodel.zip
 pnpm-debug.log
