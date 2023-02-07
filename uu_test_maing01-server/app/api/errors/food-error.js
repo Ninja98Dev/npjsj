@@ -1,12 +1,12 @@
 "use strict";
 
-const TestMainUseCaseError = require("./test-main-use-case-error.js");
+const FoodUseCaseError = require("./test-main-use-case-error.js");
 const FOOD_ERROR_PREFIX = `${TestMainUseCaseError.ERROR_PREFIX}food/`;
 
 const Create = {
   UC_CODE: `${FOOD_ERROR_PREFIX}create/`,
 
-  InvalidDtoIn: class extends TestMainUseCaseError {
+  InvalidDtoIn: class extends FoodUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Create.UC_CODE}invalidDtoIn`;
@@ -14,7 +14,7 @@ const Create = {
     }
   },
 
-  FoodCreateFaild: class extends TestMainUseCaseError {
+  FoodCreateFaild: class extends FoodUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Create.UC_CODE}FoodCreateFailed`;
