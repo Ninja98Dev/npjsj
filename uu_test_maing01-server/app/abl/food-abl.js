@@ -44,7 +44,7 @@ class FoodAbl {
     let food = await this.dao.get(awid, dtoIn.id);
 
     if (!food){
-      throw new Error.Get.FoodGetFaild({uuAppErrorMap}, {foodId: dtoIn.id});
+      throw new Error.Get.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
     }
     return {
       ...food,
