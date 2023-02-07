@@ -6,6 +6,10 @@ class FoodMongo extends UuObjectDao {
   async createSchema(){
   }
 
+  async create(food) {
+    await super.insertOne(food);
+  }
+
 }
 
 module.exports = FoodMongo;
