@@ -45,6 +45,11 @@
         "realization": "api/controllers/FoodController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "food/delete": {
+        "realization": "api/controllers/FoodController.list",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
       
     }

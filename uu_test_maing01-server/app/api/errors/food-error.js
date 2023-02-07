@@ -36,7 +36,7 @@ const Get = {
     }
   },
 
-  FoodGetFaild: class extends TestMainUseCaseError {
+  FoodDoesNotExist: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Get.UC_CODE}FoodGetFailed`;
@@ -47,7 +47,7 @@ const Get = {
 
 /*Update*/
 const Update = {
-  UC_CODE: `${FOOD_ERROR_PREFIX}create/`,
+  UC_CODE: `${FOOD_ERROR_PREFIX}update/`,
 
   InvalidDtoIn: class extends TestMainUseCaseError {
     constructor() {
@@ -65,11 +65,11 @@ const Update = {
     }
   },
 
-  FoodCreateFaild: class extends TestMainUseCaseError {
+  FoodUpdateFaild: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Update.UC_CODE}FoodCreateFailed`;
-      this.message = "Creating food by DAQ method create failed";
+      this.code = `${Update.UC_CODE}FoodUpdateFailed`;
+      this.message = "Updating food by DAQ method create failed";
     }
   },
   
@@ -87,7 +87,7 @@ const List = {
     }
   },
 
-  FoodGetFaild: class extends TestMainUseCaseError {
+  FoodListFaild: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${List.UC_CODE}FoodListFailed`;
@@ -119,7 +119,7 @@ const Delete = {
   FoodDeleteFaild: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}FoodDeleteFailed`;
+      this.code = `${Delete.UC_CODE}FoodDeleteFailed`;
       this.message = "Deleting food by DAO mehod Delete failed";
     }
   },
