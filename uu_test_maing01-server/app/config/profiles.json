@@ -28,6 +28,18 @@
       "food/create": {
         "sysStateList": ["active"],
         "profileList": ["public"]
+      },
+      "food/get": {
+        "sysStateList": ["active"],
+        "profileList": ["public"]
+      },
+      "food/update": {
+        "sysStateList": ["active"],
+        "profileList": ["public"]
+      },
+      "food/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["public"]
       }
     }
   }

@@ -30,7 +30,23 @@
         "realization": "api/controllers/FoodController.create",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "food/get": {
+        "realization": "api/controllers/FoodController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "food/update": {
+        "realization": "api/controllers/FoodController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "food/list": {
+        "realization": "api/controllers/FoodController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
+      
     }
   }
 }
