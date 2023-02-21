@@ -28,10 +28,13 @@ class FoodMongo extends UuObjectDao {
   }
 
   /*LIST*/
-  async list(){
-    let filter = {};
-    return await super.findMany(filter);
+  async list(awid){
+    let filter = {
+      awid: awid
+    };
+    return await super.find(filter);
   }
+  
   /*DELETE*/
   async delete(uuObject){
     let filter = {

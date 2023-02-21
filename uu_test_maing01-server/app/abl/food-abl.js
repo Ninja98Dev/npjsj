@@ -19,7 +19,7 @@ class FoodAbl {
   }
   /* CREATE */
   async create(awid, dtoIn, uuAppErrorMap = {}) {
-    let validationResult = this.validatoor("foodCreateDtoInType", dtoIn);
+    let validationResult = this.validator.validate("foodCreateDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Create.InvalidDtoIn);
   
@@ -27,7 +27,7 @@ class FoodAbl {
     try{
       foodResult = await this.dao.create({...dtoIn, awid});
     }catch(e){
-      throw new Error.Create.FoodCreateFailed({uuAppErrorMap}, e);
+      throw new Errors.Create.FoodCreateFailed({uuAppErrorMap}, e);
     }
 
     return {
@@ -38,13 +38,13 @@ class FoodAbl {
   };
   /*GET*/
   async get(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validatoor("foodGetDtoInType", dtoIn);
+    let validationResult = this.validator.validate("foodGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Get.InvalidDtoIn);
 
     let food = await this.dao.get(awid, dtoIn.id);
 
     if (!food){
-      throw new Error.Get.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
+      throw new Errors.Get.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
     }
     return {
       ...food,
@@ -55,7 +55,7 @@ class FoodAbl {
 
   /*UPDATE*/
   async update(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validatoor("foodUpdateDtoInType", dtoIn);
+    let validationResult = this.validator.validate("foodUpdateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Update.InvalidDtoIn);
 
     let food = await this.dao.get(awid,dtoIn.id);
@@ -78,20 +78,20 @@ class FoodAbl {
   };
   /*DELETE*/
   async delete(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validatoor("foodDeleteDtoInType", dtoIn);
+    let validationResult = this.validator.validate("foodDeleteDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Delete.InvalidDtoIn);
 
     let food = await this.dao.get(awid, dtoIn.id);
 
     if (!food){
-      throw new Error.Delete.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
+      throw new Errors.Delete.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
     }
 
     
     try{
       await this.dao.delete({...dtoIn, awid});
     }catch(e){
-      throw new Error.Delete.FoodDeleteFailed({uuAppErrorMap}, e);
+      throw new Errors.Delete.FoodDeleteFailed({uuAppErrorMap}, e);
     }
     
     return {
@@ -102,14 +102,14 @@ class FoodAbl {
   
   /*LIST*/
   async list(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validatoor("foodListDtoInType", dtoIn);
+    let validationResult = this.validator.validate("foodListDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Delete.InvalidDtoIn);
 
     let foodResult;
     try{
-      foodResult = await this.dao.list({});
+      foodResult = await this.dao.list(awid);
     }catch(e){
-      throw new Error.Delete.FoodListFailed({uuAppErrorMap}, e);
+      throw new Errors.List.FoodListFailed({uuAppErrorMap}, e);
     }
 
     return {

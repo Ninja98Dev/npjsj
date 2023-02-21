@@ -87,7 +87,7 @@ const List = {
     }
   },
 
-  FoodListFaild: class extends TestMainUseCaseError {
+  FoodListFailed: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${List.UC_CODE}FoodListFailed`;

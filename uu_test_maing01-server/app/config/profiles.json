@@ -27,19 +27,23 @@
       },
       "food/create": {
         "sysStateList": ["active"],
-        "profileList": ["public"]
+        "profileList": ["Public"]
       },
       "food/get": {
         "sysStateList": ["active"],
-        "profileList": ["public"]
+        "profileList": ["Public"]
       },
       "food/update": {
         "sysStateList": ["active"],
-        "profileList": ["public"]
+        "profileList": ["Public"]
       },
       "food/delete": {
         "sysStateList": ["active"],
-        "profileList": ["public"]
+        "profileList": ["Public"]
+      },
+      "food/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

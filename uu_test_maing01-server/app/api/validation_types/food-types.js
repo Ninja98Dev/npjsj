@@ -24,7 +24,6 @@ const foodUpdateDtoInType = shape({
 });
 
 const foodListDtoInType = shape({
-    id: integer(10).isRequired(),
     kod: integer(5),
     cislo: integer(5),
     nazov: string(100),
