@@ -3,7 +3,7 @@
   "uuSubAppDataStoreMap": {
     "primary": "mongodb://127.0.0.1:27017/testMainPrimary"
   },
-  "asid_license_owner_list": ["8189-6826-1", "1618-7447-1", "9576-343-1"],
+  "asid_license_owner_list": ["8189-6826-1", "1618-7447-1", "9576-343-1", "9844-8822-1"],
   "asid": "11111111111111111111111111111111",
   "log_level": "INFO"
 }
