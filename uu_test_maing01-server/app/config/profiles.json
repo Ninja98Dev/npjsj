@@ -44,6 +44,10 @@
       "food/list": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "ingretions": {
+        "sysStateList": ["active"],
+        "profileList": ["public"]
       }
     }
   }

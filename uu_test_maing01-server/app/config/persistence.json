@@ -9,6 +9,9 @@
         },
         "food": {
           "realization": "dao/FoodMongo"
+        },
+        "ingretions": {
+          "realization": "dao/IngretionsMongo"
         }
       }
     }

@@ -50,8 +50,12 @@
         "realization": "api/controllers/FoodController.list",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "ingretions": {
+        "realization": "api/controllers/IngretionsController.ingretions",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
-      
     }
   }
 }
