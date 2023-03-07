@@ -2,6 +2,7 @@
 
 const TestMainUseCaseError = require("./test-main-use-case-error.js");
 const FOOD_ERROR_PREFIX = `${TestMainUseCaseError.ERROR_PREFIX}food/`;
+
 /*CREATE*/
 const Create = {
   UC_CODE: `${FOOD_ERROR_PREFIX}create/`,

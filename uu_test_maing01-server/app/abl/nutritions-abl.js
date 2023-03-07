@@ -3,31 +3,31 @@ const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
-const Errors = require("../api/errors/ingretions-error.js");
+const Errors = require("../api/errors/nutritions-error.js");
 
 const WARNINGS = {
 
 };
 
-class IngretionsAbl {
+class NutritionsAbl {
 
   constructor() {
     this.validator = Validator.load();
-    this.dao = DaoFactory.getDao("ingretions");
+    this.dao = DaoFactory.getDao("nutritions");
   }
 
   /*GET*/
   async get(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validator.validate("ingretionsGetDtoInType", dtoIn);
+    let validationResult = this.validator.validate("nutritionGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, Errors.Get.InvalidDtoIn);
 
-    let ingretion = await this.dao.get(dtoIn.kod);
+    let nutrition = await this.dao.get(dtoIn.kod);
 
-    if (!ingretion){
-      throw new Errors.Get.IngretionDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
+    if (!nutrition){
+      throw new Errors.Get.NutritionsDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
     }
     return {
-      ...ingretion,
+      ...nutrition,
       uuAppErrorMap,
     };
 
@@ -35,14 +35,14 @@ class IngretionsAbl {
   
   /*LIST*/
   async list(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validator.validate("ingretionsListDtoInType", dtoIn);
+    let validationResult = this.validator.validate("nutritionsListDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, Errors.List.InvalidDtoIn);
 
     let ingretions;
     try{
       ingretions = await this.dao.list(awid);
     }catch(e){
-      throw new Errors.List.IngretionListFailed({uuAppErrorMap}, e);
+      throw new Errors.List.NutritionsListFailed({uuAppErrorMap}, e);
     }
 
     return {
@@ -52,10 +52,10 @@ class IngretionsAbl {
   };
 
   /*
-  async ingretions(awid, dtoIn) {
+  async nutritions(asid, dtoIn) {
     
   }
   */
 }
 
-module.exports = new IngretionsAbl();
+module.exports = new NutritionsAbl();

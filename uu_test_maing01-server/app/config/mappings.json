@@ -47,12 +47,37 @@
         "type": "CMD"
       },
       "food/delete": {
-        "realization": "api/controllers/FoodController.list",
+        "realization": "api/controllers/FoodController.delete",
         "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "ingretions/get": {
+        "realization": "api/controllers/IngretionsController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "ingretions/list": {
+        "realization": "api/controllers/IngretionsController.list",
+        "httpMethod": "GET",
         "type": "CMD"
       },
       "ingretions": {
         "realization": "api/controllers/IngretionsController.ingretions",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "nutritions/get": {
+        "realization": "api/controllers/NutritionsController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "nutritions/list": {
+        "realization": "api/controllers/NutritionsController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "nutritions": {
+        "realization": "api/controllers/NutritionsController.nutritions",
         "httpMethod": "GET",
         "type": "CMD"
       }

@@ -1,7 +1,12 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public"],
-    "useCaseMap": {}
+    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public","public"],
+    "useCaseMap": {
+      "nutritions": {
+        "sysStateList": ["active"],
+        "profileList": ["public"]
+      }
+    }
   },
   "*": {
     "profileList": ["Authorities","Executives","AwidLicenseOwner","Public","Authenticated","AwidInitiator","public"],
@@ -42,6 +47,22 @@
         "profileList": ["Public"]
       },
       "food/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "ingretions/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "ingretions/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "nutritions/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "nutritions/get": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
       },

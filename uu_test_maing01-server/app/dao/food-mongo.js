@@ -30,7 +30,7 @@ class FoodMongo extends UuObjectDao {
   /*LIST*/
   async list(awid){
     let filter = {
-      awid: awid
+      
     };
     return await super.find(filter);
   }

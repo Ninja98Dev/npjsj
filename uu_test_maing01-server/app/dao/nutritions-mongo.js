@@ -1,7 +1,7 @@
 "use strict";
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
-class IngretionsMongo extends UuObjectDao {
+class NutritionsMongo extends UuObjectDao {
 
   async createSchema(){
   }
@@ -24,4 +24,4 @@ class IngretionsMongo extends UuObjectDao {
 
 }
 
-module.exports = IngretionsMongo;
+module.exports = NutritionsMongo;

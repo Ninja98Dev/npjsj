@@ -12,6 +12,9 @@
         },
         "ingretions": {
           "realization": "dao/IngretionsMongo"
+        },
+        "nutritions": {
+          "realization": "dao/NutritionsMongo"
         }
       }
     }

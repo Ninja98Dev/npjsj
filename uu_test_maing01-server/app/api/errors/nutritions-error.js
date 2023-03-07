@@ -1,16 +1,16 @@
 "use strict";
 
 const TestMainUseCaseError = require("./test-main-use-case-error.js");
-const INGRETIONS_ERROR_PREFIX = `${TestMainUseCaseError.ERROR_PREFIX}ingretions/`;
+const NUTRITIONS_ERROR_PREFIX = `${TestMainUseCaseError.ERROR_PREFIX}nutritions/`;
 
-const Ingretions = {
-  UC_CODE: `${INGRETIONS_ERROR_PREFIX}ingretions/`,
+const Nutritions = {
+  UC_CODE: `${NUTRITIONS_ERROR_PREFIX}nutritions/`,
   
 };
 
 // GET
 const Get = {
-  UC_CODE: `${INGRETIONS_ERROR_PREFIX}get/`,
+  UC_CODE: `${NUTRITIONS_ERROR_PREFIX}get/`,
 
   InvalidDtoIn: class extends TestMainUseCaseError {
     constructor() {
@@ -20,18 +20,18 @@ const Get = {
     }
   },
 
-  IngretionDoesNotExist: class extends TestMainUseCaseError {
+  NutritionsDoesNotExist: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${Get.UC_CODE}IngretionGetFailed`;
-      this.message = "Ingretion with this id does not exist.";
+      this.message = "Nutrition with this id does not exist.";
     }
   },
 };
 
 // LIST
 const List = {
-  UC_CODE: `${INGRETIONS_ERROR_PREFIX}list/`,
+  UC_CODE: `${NUTRITIONS_ERROR_PREFIX}list/`,
 
   InvalidDtoIn: class extends TestMainUseCaseError {
     constructor() {
@@ -41,17 +41,17 @@ const List = {
     }
   },
 
-  IngretionListFailed: class extends TestMainUseCaseError {
+  NutritionsListFailed: class extends TestMainUseCaseError {
     constructor() {
       super(...arguments);
       this.code = `${List.UC_CODE}IngretionListFailed`;
-      this.message = "Could't reach Ingretion data.";
+      this.message = "Could't reach Nutritions data.";
     }
   },
 };
 
 module.exports = {
-  Ingretions,
+  Nutritions,
   Get,
   List
 };
