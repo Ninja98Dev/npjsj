@@ -9,15 +9,15 @@ class IngretionsMongo extends UuObjectDao {
   /*GET*/
   async get(kod){
     let filter = {
-      kod: kod,
+      kod: kod
     };
     return await super.findOne(filter);
   }
 
   /*LIST*/
-  async list(){
+  async list(dtoIn){
     let filter = {
-      
+      kod: dtoIn.kod
     };
     return await super.find(filter);
   }

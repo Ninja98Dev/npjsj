@@ -40,7 +40,7 @@ class IngretionsAbl {
 
     let ingretions;
     try{
-      ingretions = await this.dao.list(awid);
+      ingretions = await this.dao.list(dtoIn);
     }catch(e){
       throw new Errors.List.IngretionListFailed({uuAppErrorMap}, e);
     }

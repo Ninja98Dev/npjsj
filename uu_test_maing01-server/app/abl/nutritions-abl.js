@@ -40,7 +40,7 @@ class NutritionsAbl {
 
     let ingretions;
     try{
-      ingretions = await this.dao.list(awid);
+      ingretions = await this.dao.list(dtoIn.kod);
     }catch(e){
       throw new Errors.List.NutritionsListFailed({uuAppErrorMap}, e);
     }
