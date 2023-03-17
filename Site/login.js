@@ -18,4 +18,5 @@ function LogIn() {
 }
 function LogOut() {
 	sessionStorage.setItem("logged", "false");
+	window.open("../index.htm", "_self");
 }
