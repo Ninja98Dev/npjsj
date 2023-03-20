@@ -7,13 +7,22 @@
 		<title>Menu</title>
 	</head>
 	
-	<body>
-		<header align="right" style="background-color: white";>
-			<a href="../index.htm" onclick="LogOut();">Odhlásiť</a>
-		</header>
+	<body style="margin: 0;">
+		<nav style="overflow: hidden;";>
+			<img src="../sources/logoDark.png" width=35 height=50 style="margin: 3px 0px 0px 8px">
+			<button type="button" onclick="LogOut();" style="float: right; padding: 10px; margin: 7px">Odhlásiť</button>
+		</nav>
 		
-		<h1 align="center">Hlavné menu</h1>
-		<p id="demo"></p>
+		<table align=center id="mainMenuNavig">
+			<tr>
+				<td><button id="navigButton" type="button" onclick='window.open("foodSelect.htm", "_self");'>Výber jedla</button></td>
+				<td><button id="navigButton" type="button" onclick='window.open("editor.htm", "_self");'>Úprava noriem</button></td>
+			</tr>
+			<tr>
+				<td><button id="navigButton" type="button" onclick='window.open("statistics.htm", "_self");'>Štatistika</button></td>
+			</tr>
+		</table>
+		
 		<script src="../login.js"></script>
 	</body>
 </html>
