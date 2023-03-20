@@ -5,7 +5,7 @@ appServer.start();
 const IngretionsAbl = require('./app/abl/ingretions-abl');
 const awid = "22222222222222222222222222222222";
 
-const frontend = {
+const input = {
     skola : [
         {
             type: "A",
@@ -67,22 +67,26 @@ const frontend = {
     ]
 }
 
-function calculateIngretionQuantity(ingretion, trieda){
+function calculateIngretionQuantity(ingretion, trieda, count){
+    let quantity = 0;
     switch(trieda){
         case "A":
-            return ingretion.ahruba;
+            quantity = ingretion.ahruba;
+            break;
         case "B":
-            return ingretion.bhruba;
+            quantity = ingretion.bhruba;
+            break;
         case "C":
-            return ingretion.chruba;
+            quantity = ingretion.chruba;
+            break;
         case "D":
-            return ingretion.dhruba;
-        default:
-            return null;
+            quantity = ingretion.dhruba;
+            break;
     }
+    return (count*quantity)/100;
 }
 
-async function getAllIngretions(norma, trieda){
+async function getAllIngretions(norma, trieda, count){
     return new Promise(async (resolve) => {
         let dtoIn = { kod: norma }
         let daoIngretions = await IngretionsAbl.list(awid, dtoIn);
@@ -90,86 +94,39 @@ async function getAllIngretions(norma, trieda){
         daoIngretions.itemList.forEach(ingretion => {
             const newIngretion = {
                 id: ingretion.id,
-                quantity: calculateIngretionQuantity(ingretion, trieda)
+                mj: ingretion.mj,
+                name: ingretion.nazov,
+                quantity: calculateIngretionQuantity(ingretion, trieda, count)
             };
-            if(ingretions.some(item => item.id === ingretion.id)){
-                //  Ak sa ingrediencia nachadza v zozname tak pripocitat ku nej nove mnozstvo
-                console.log(true);
-                const index = ingretions.findIndex(item => item.id == newIngretion.id);
-                ingretions[index].quantity += newIngretion.quantity; 
-        
-            }else {
-                //  Ak sa nenachadza ingrediencia v zozname, vlozit ju tam
-                ingretions.push(newIngretion);
-            } 
+            ingretions.push(newIngretion);
         });
         resolve(ingretions);
-        // obkejt s {nazov, mnozstvo}
+        // obkejt s {id, mnozstvo}
     });
 }
-async function calculateIngretions(frontend) {
+async function calculateIngretions(input) {
     const ingretionCounts = {};
-    for (const skola of frontend.skola) {
+    for (const skola of input.skola) {
       for (const strava of skola.strava) {
         for (const norma of strava.normy) {
-          const result = await getAllIngretions(norma, skola.type);
+          const result = await getAllIngretions(norma, skola.type, strava.pocet);
           for (const ingretion of result) {
             if (ingretionCounts[ingretion.id]) {
-              ingretionCounts[ingretion.id] += parseFloat(ingretion.quantity);  //premeni na int
+                ingretionCounts[ingretion.id].quantity += parseFloat(ingretion.quantity);
             } else {
-              ingretionCounts[ingretion.id] = parseFloat(ingretion.quantity);
+                ingretionCounts[ingretion.id] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj, name:ingretion.name};
             }
           }
         }
       }
     }
-    const ingretions = Object.entries(ingretionCounts).map(([id, quantity]) => ({ id, quantity: parseFloat(quantity.toFixed(3)) }));
-    console.log("ingretions", ingretions);
+    const ingretions = Object.entries(ingretionCounts).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
     return ingretions;
   }
-  
-/*
-async function calculateIngretions(frontend){
-    return new Promise(async (resolve) =>{
-        let ingretions = [];
-        frontend.skola.forEach(skola => {
-            skola.strava.forEach(strava => {
-                strava.normy.forEach(norma => {
-                    getAllIngretions(norma, skola.type).then((result) => {
-                        result.forEach(ingretion => {
-                            if(ingretions.some(item => item.id === ingretion.id)){
-                                //  Ak sa ingrediencia nachadza v zozname tak pripocitat ku nej nove mnozstvo
-                                console.log(true);
-                                const index = ingretions.findIndex(item => item.id == ingretion.id);
-                                ingretions[index].quantity += ingretion.quantity; 
-                        
-                            }else {
-                                //  Ak sa nenachadza ingrediencia v zozname, vlozit ju tam
-                                ingretions.push(ingretion);
-                            } 
-                        });
-                    });
-                });
-            });
-        });
-    });
-}
-*/ 
-
 
 async function test(){
-    calculateIngretions(frontend).then((result) =>{
+    calculateIngretions(input).then((result) =>{
         console.log(result);
     });
 }
 test();
-
-
-/*
-
-    NEW
-
-*/
-
-
- //Dobru noc :)
