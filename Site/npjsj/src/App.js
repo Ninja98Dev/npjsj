@@ -12,9 +12,9 @@ class App extends Component {
 				<div class="login">				
 				<fieldset>
 					<legend>Prihlásenie</legend>
-					<img src={logo}></img><br></br>
-					Login: <input type='text' name='txtLogin'></input><br></br>
-					Heslo: <input type='text' name='txtPasswd'></input>
+					<img src={logo}></img>
+					Prístupový kód: <input type='password' name='txtPasswd'></input>
+					<button>Prihlásiť</button>
 				</fieldset>
 				</div>
 			</div>

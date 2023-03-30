@@ -2,6 +2,14 @@
 	width: 250px;
 	margin: auto;
 }
-.login fieldset{
+.login fieldset {
 	border-radius: 7px;
+	display: grid;
+}
+.login img {
+	margin: auto;
+}
+.login button {
+	margin-left: 150px;
+	margin-top: 10px;
 }
