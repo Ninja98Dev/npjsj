@@ -1,0 +1,24 @@
+body {
+	margin: 0px;
+}
+nav {
+	overflow: hidden;
+	background-color: dodgerblue;
+}
+img {
+	margin: 3px 0px 0px 8px;
+}
+#navigButton {
+	
+	width: 250px;
+	height: 85px;
+	margin: 15px;
+	font-size: 20px;
+}
+#logOutButton {
+	float: right; padding: 10px; 
+	margin: 7px;
+}
+#mainMenuNavig {
+	
+}
