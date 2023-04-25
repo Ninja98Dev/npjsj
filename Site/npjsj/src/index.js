@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import logo from './sources/logo.png';
 
 import { Menu } from './App/menu.js';
+import { FoodSelector } from './App/foodSelector.js';
+import { Edit } from './App/edit.js';
+import { Statistics } from './App/statistics.js';
+
 
 let incorrect = false;
 
@@ -29,7 +33,10 @@ export function LogOut(){
 	incorrect = false;
 	root.render(<Login />);
 }
-
+export function renderMenu() { root.render(<Menu />); }
+export function renderFoodSelector() { root.render(<FoodSelector />); }
+export function renderEdit() { root.render(<Edit />); }
+export function renderStatistics() { root.render(<Statistics />); }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

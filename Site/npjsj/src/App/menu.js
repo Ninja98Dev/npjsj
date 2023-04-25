@@ -1,6 +1,6 @@
 import './menu.css';
 import logo from '../sources/logoDark.png'
-import { LogOut } from '../index.js' 
+import { LogOut, renderFoodSelector, renderEdit, renderStatistics } from '../index.js' 
 
 export function Menu() {
 	return (
@@ -12,11 +12,11 @@ export function Menu() {
 			
 			<table align="center" id="mainMenuNavig">
 				<tr>
-					<td><button id="navigButton" onClick='window.open("foodSelect.htm", "_self");'>Výber jedla</button></td>
-					<td><button id="navigButton" onClick='window.open("editor.htm", "_self");'>Úprava noriem</button></td>
+					<td><button id='navigButton' onClick={renderFoodSelector}>Výber jedla</button></td>
+					<td><button id="navigButton" onClick={renderEdit}>Úprava noriem</button></td>
 				</tr>
 				<tr>
-					<td><button id="navigButton" onClick='window.open("statistics.htm", "_self");'>Štatistika</button></td>
+					<td><button id="navigButton" onClick={renderStatistics}>Štatistika</button></td>
 				</tr>
 			</table>
 		</div>
