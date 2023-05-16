@@ -1,0 +1,48 @@
+body {
+	
+}
+
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     LOGIN     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
+.login {
+
+}
+.login fieldset {
+
+}
+.login img {
+
+}
+.login button {
+
+}
+
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     MENU     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
+#navigButton {
+
+}
+#logOutButton {
+
+}
+#mainMenuNavig {
+	
+}
+.topPanel img {
+	
+}
+
+
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     MISC / UNI     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
+nav {
+	background-color: dodgerblue;
+}
+#backButton {
+	font-family: monospace;
+	background-color: white;
+	color: navy;
+	border-color: navy;
+	border-width: 3px;
+}
+.elements h1 {
+	background-color: lime;
+	color: darkGreen;
+}

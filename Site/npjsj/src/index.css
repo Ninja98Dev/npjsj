@@ -1,3 +1,8 @@
+body {
+	margin: 0px;
+}
+
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     LOGIN     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
 .login {
 	width: 250px;
 	margin: auto;
@@ -14,12 +19,57 @@
 	margin-top: 10px;
 }
 
-#backButton {
-	margin: 5px;
-	padding: 5px 15px 5px 15px ;
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     MENU     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
+#navigButton {
+	width: 250px;
+	height: 85px;
+	margin: 15px;
 	font-size: 20px;
 }
-.elements h1 {
-	background-color: lime;
-	color: darkGreen;
+#logOutButton {
+	float: right;
+	padding: 10px; 
+	margin: 7px;
 }
+#mainMenuNavig {
+	
+}
+.topPanel img {
+	margin: 3px 0px 0px 8px;
+}
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     FOOD SELECT     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
+#foodSelField {
+	width: 800px;
+	margin: auto;
+}
+.foodTabs fieldset {
+	width: 250px;
+	height: 200px;
+}
+.foodTabs legend{
+	margin: auto;
+	font-size: 20px;
+}
+.foodTabs table {
+	margin: auto;
+}
+#tabButton {
+	padding: 10px;
+	width: 125px;
+}
+
+/*/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\     MISC / UNI     /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\*/
+nav {
+	overflow: hidden;
+}
+#backButton {
+	margin: 5px;
+	padding: 5px 15px 5px 15px;
+	font-size: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius: 25px;
+}
+.elements h1 {
+}
+

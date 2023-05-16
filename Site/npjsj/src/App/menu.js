@@ -1,10 +1,9 @@
-import './menu.css';
 import logo from '../sources/logoDark.png'
 import { LogOut, renderFoodSelector, renderEdit, renderStatistics } from '../index.js' 
 
 export function Menu() {
 	return (
-		<div>
+		<div class="topPanel">
 			<nav>
 				<img src={logo} width="35" height="50"></img>
 				<button onClick={LogOut} id="logOutButton">Odhlásiť</button>

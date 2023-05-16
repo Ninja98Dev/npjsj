@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
+
+import './index.css';
+import './style.css';
 
 import logo from './sources/logo.png';
 
@@ -56,8 +58,6 @@ function Login(props){
 				</div>
 			</div>);
 }
-
-
 
 
 reportWebVitals();
