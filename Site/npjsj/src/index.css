@@ -45,6 +45,7 @@ body {
 .foodTabs fieldset {
 	width: 250px;
 	height: 200px;
+	position: relative;
 }
 .foodTabs legend{
 	margin: auto;
@@ -52,6 +53,10 @@ body {
 }
 .foodTabs table {
 	margin: auto;
+}
+.foodTabs button {
+	position: absolute;
+	bottom: 5px;
 }
 #tabButton {
 	padding: 10px;
