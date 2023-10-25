@@ -18,10 +18,10 @@ dist-esm/
 doc/
 out/
 build/
-public/
+#public/
 target/
 package-lock.json
-node_modules/
+#node_modules/
 metamodel.zip
 pnpm-debug.log
 Gemfile.lock
