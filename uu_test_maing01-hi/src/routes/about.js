@@ -127,6 +127,13 @@ let About = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props);
     return legacyComponentsReady ? (
       <div {...attrs}>
+        <h1>AIOWDJIOAWDAWIOJDIOAWDJAIOWDJi</h1>
+        <Uu5Elements.Button size="l" icon="uugds-favorites" iconRight="uugds-menu-down">
+          <p>Ahoj</p>
+          <p>Ahoj</p>
+          <p>Ahoj</p>
+          <p>Ahoj</p>
+        </Uu5Elements.Button>
         <RouteBar />
         <div className={Css.content()}>
           <DynamicLibraryComponent
