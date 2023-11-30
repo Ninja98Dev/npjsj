@@ -1,16 +1,14 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, useSession, Lsi } from "uu5g05";
+import { Utils, createVisualComponent, useSession, useAppBackground } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
 
+import FoodType from "../bricks/chooseFood/foodType.js";
+
 const Css = {
-  icon: () =>
-    Config.Css.css({
-      fontSize: 48,
-      lineHeight: "1em",
-    }),
+  
 };
 
 let ChooseFood = createVisualComponent({
@@ -24,10 +22,15 @@ let ChooseFood = createVisualComponent({
 
     return (
         <Uu5Elements.Grid 
-        templateColumns="repeat(2, 20rem)"
+        templateColumns="repeat(3, 20rem)"
         justifyContent="center"
-        alignContent="center">
-            <h1>Výber jedla</h1>
+        alignContent="center">   
+          <FoodType title="Raňajky"/>
+          <FoodType title="Obed 1"/>
+          <FoodType title="Večera"/>
+          <FoodType title="Raňajky"/>
+          <FoodType title="Obed"/>
+          <FoodType title="Večera"/>
         </Uu5Elements.Grid>
     );
   },

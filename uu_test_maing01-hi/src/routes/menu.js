@@ -6,13 +6,23 @@ import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
 
 const Css = {
-  icon: () =>
-    Config.Css.css({
-      fontSize: 48,
-      lineHeight: "1em",
-    }),
-  background: "black",
-  
+  panel: () =>
+    Config.Css.css`
+      background-image: url(${"../assets/images/menu/bg.jpg"});
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      height: 100%;
+    `,
+  grid: () =>
+    Config.Css.css`
+      background-color: rgba(0, 0, 0, 0.5);
+      height: 100%;
+    `,
+  button: () =>
+    Config.Css.css`
+      height: 10rem;
+    `,
 };
 
 let Home = createVisualComponent({
@@ -25,14 +35,17 @@ let Home = createVisualComponent({
     console.log(identity);
 
     return (
+      <div className={Css.panel()}>
         <Uu5Elements.Grid
         templateColumns="repeat(2, 20rem)"
         justifyContent="center"
-        alignContent="center">
-            <Uu5Elements.Button href={"./chooseFood"} size="xl" colorScheme="primary" effect="ground">VYBER JEDLA</Uu5Elements.Button>
-            <Uu5Elements.Button href={"./editNorms"} size="xl" colorScheme="primary" effect="ground">UPRAVA NORIEM</Uu5Elements.Button>
-            <Uu5Elements.Button href={"./stats"} size="xl" colorScheme="primary">ŠTATISTIKA</Uu5Elements.Button>
+        alignContent="center"
+        className={Css.grid()}>
+            <Uu5Elements.Button href={"./chooseFood"} size="xl" significance="highlighted" colorScheme="primary" effect="ground">VYBER JEDLA</Uu5Elements.Button>
+            <Uu5Elements.Button href={"./editNorms"} size="xl" significance="highlighted" colorScheme="primary" effect="ground">UPRAVA NORIEM</Uu5Elements.Button>
+            <Uu5Elements.Button href={"./stats"} size="xl" significance="highlighted" colorScheme="primary">ŠTATISTIKA</Uu5Elements.Button>
         </Uu5Elements.Grid>
+      </div>
     );
   },
 });
