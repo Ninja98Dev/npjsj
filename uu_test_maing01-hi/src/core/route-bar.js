@@ -46,7 +46,7 @@ const RouteBar = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    return <Plus4U5App.RouteBar appActionList={appActionList} {...props} />;
+    return <Plus4U5App.RouteBar appActionList={appActionList} {...props}  />;
     //@@viewOff:render
   },
 });

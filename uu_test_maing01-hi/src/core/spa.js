@@ -6,22 +6,31 @@ import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
+
 //@@viewOff:imports
 
 //@@viewOn:constants
 const About = Utils.Component.lazy(() => import("../routes/about.js"));
+const Menu = Utils.Component.lazy(() => import("../routes/menu.js"));
+const ChooseFood = Utils.Component.lazy(() => import("../routes/chooseFood.js"));
 const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
+const EditNorms = Utils.Component.lazy(() => import("../routes/editNorms.js"));
+const Stats = Utils.Component.lazy(() => import("../routes/stats.js"));
 
 const ROUTE_MAP = {
   "": { redirect: "home" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
+  menu: (props) => <Menu {...props}/>,
+  chooseFood: (props) => <ChooseFood {...props}/>,
+  editNorms: (props) => <EditNorms {...props}/>,
+  stats: (props) => <Stats {...props}/>,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (
     <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found
+      Not Found ha
     </Uu5Elements.Text>
   ),
 };
@@ -43,7 +52,8 @@ const Spa = createVisualComponent({
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
-  defaultProps: {},
+  defaultProps: {
+  },
   //@@viewOff:defaultProps
 
   render() {
