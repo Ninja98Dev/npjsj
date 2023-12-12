@@ -1,10 +1,11 @@
 //@@viewOn:imports
-import { Utils, createVisualComponent, PropTypes, useScreenSize } from "uu5g05";
+import { createVisualComponent, PropTypes } from "uu5g05";
 
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
 
 import ButtonToolTip from "../buttonToolTip.js";
+import FoodItem from "./foodItem.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -17,7 +18,7 @@ const Css = {
         border-radius: 1rem;
         display: flex;
         width: 100%;
-        height: 15rem;
+        height: 18.5rem;
         color: white;
         margin-top: 1rem;
     `,
@@ -25,7 +26,6 @@ const Css = {
         background-color: #404040;
         border-radius: 0.5rem 0.5rem 0 0;
         text-align: center;
-        padding: 0.5rem;
         flex-basis: 20%
     `,
 
@@ -38,13 +38,17 @@ const Css = {
     footer: () => Config.Css.css`
         background-color: #404040;
         border-radius: 0 0 0.5rem 0.5rem;
-        padding: 0.5rem;
+        align-items: center;
         flex-basis: 20%;
-        height: 100%
     `,
 
     input: () => Config.Css.css`
       text-align: center;
+    `,
+
+    title: () => Config.Css.css`
+      height: 100%;
+      line-height: 3.7rem;
     `,
 };
 //@@viewOff:css
@@ -81,15 +85,35 @@ const FoodType = createVisualComponent({
     return (
       <div className={Css.main()}>
         <div className={Css.header()}>
-            <Uu5Elements.Text category={"story"} segment={"heading"} type={"h3"}>{title}</Uu5Elements.Text>
+            <Uu5Elements.Text category={"story"} segment={"heading"} type={"h3"} className={Css.title()}>{title}</Uu5Elements.Text>
         </div>
         
         <div className={Css.body()}>
-            
+          <Uu5Elements.ScrollableBox maxHeight="11.1rem">
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+          </Uu5Elements.ScrollableBox>
         </div>
 
         <div className={Css.footer()}>
-        <Uu5Elements.ListItem className={Config.Css.css`padding:0;gap:0.4rem; padding:0rem;`}>
+        <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`}>
           <ButtonToolTip tip="Polievka" icon={"mdi-bowl"} effect="upper" colorScheme="neutral" significance="highlighted" onClick={()=>console.log("cus")}/>
           <ButtonToolTip tip="Hlavné jedlo" icon={"mdi-food"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
           <ButtonToolTip tip="Príloha" icon={"mdi-rice"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
