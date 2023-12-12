@@ -107,7 +107,7 @@ class FoodAbl {
 
     let foodResult;
     try{
-      foodResult = await this.dao.list(awid);
+      foodResult = await this.dao.list(awid, dtoIn);
     }catch(e){
       throw new Errors.List.FoodListFailed({uuAppErrorMap}, e);
     }

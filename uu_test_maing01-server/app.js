@@ -3,6 +3,7 @@ const appServer = require("uu_appg01_server");
 appServer.start();
 
 const IngretionsAbl = require('./app/abl/ingretions-abl');
+const FoodAbl = require('./app/abl/food-abl');
 const awid = "22222222222222222222222222222222";
 /*
 const input = {
@@ -157,7 +158,7 @@ async function calculateIngretions(input) {
 
 async function test(){
     calculateIngretions(input).then((result) =>{
-        console.log(result);
+        //console.log(result);
     });
 }
 test();

@@ -32,7 +32,6 @@ let Home = createVisualComponent({
 
   render(props) {
     const { identity } = useSession();
-    console.log(identity);
 
     return (
       <div className={Css.panel()}>

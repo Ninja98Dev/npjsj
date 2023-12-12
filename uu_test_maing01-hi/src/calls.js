@@ -36,6 +36,11 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
+  getAllFoods(dtoInData){
+    const commandUri = Calls.getCommandUri("food/list");
+    return Calls.call("get", commandUri, dtoInData);
+  },
+
   async initAndGetWorkspace(dtoInData) {
     await Calls.initWorkspace(dtoInData);
     return await Calls.getWorkspace();

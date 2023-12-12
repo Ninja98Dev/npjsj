@@ -4,7 +4,6 @@ const NutritionsAbl = require("../../abl/nutritions-abl.js");
 class NutritionsController {
 
   get(ucEnv) {
-    console.log(ucEnv.getDtoIn());
     return NutritionsAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 

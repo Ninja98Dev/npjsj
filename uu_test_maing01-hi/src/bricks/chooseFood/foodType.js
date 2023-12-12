@@ -4,6 +4,7 @@ import { createVisualComponent, PropTypes } from "uu5g05";
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
 
+import FoodPicker from "./foodPicker.js";
 import ButtonToolTip from "../buttonToolTip.js";
 import FoodItem from "./foodItem.js";
 //@@viewOff:imports
@@ -114,12 +115,13 @@ const FoodType = createVisualComponent({
 
         <div className={Css.footer()}>
         <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`}>
-          <ButtonToolTip tip="Polievka" icon={"mdi-bowl"} effect="upper" colorScheme="neutral" significance="highlighted" onClick={()=>console.log("cus")}/>
-          <ButtonToolTip tip="Hlavné jedlo" icon={"mdi-food"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
-          <ButtonToolTip tip="Príloha" icon={"mdi-rice"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
-          <ButtonToolTip tip="Pečivo" icon={"mdi-food-croissant"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
-          <ButtonToolTip tip="Zákusok" icon={"mdi-food-apple"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
-          <ButtonToolTip tip="Voda" icon={"mdi-cup"} effect="upper" colorScheme={"neutral"} significance="highlighted" onClick={()=>console.log("cus")}/>
+          <FoodPicker buttonProps={{tip:"Polievka", icon:"mdi-bowl", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Polievky"/>
+          <FoodPicker buttonProps={{tip:"Hlavné jedlo", icon:"mdi-food", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Hlavné jedlá"/>
+          <FoodPicker buttonProps={{tip:"Príloha", icon:"mdi-rice", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Prílohy"/>
+          <FoodPicker buttonProps={{tip:"Pečivo", icon:"mdi-food-croissant", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Pečivá"/>
+          <FoodPicker buttonProps={{tip:"Zákusok", icon:"mdi-food-apple", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Zákusky"/>
+          <FoodPicker buttonProps={{tip:"Voda", icon:"mdi-cup", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Vody"/>
+          
           <Uu5Elements.Input effect="upper" colorScheme={"neutral"} significance="highlighted" width={"3rem"} placeholder="0" className={Css.input()}/>
         </Uu5Elements.ListItem>
         </div>

@@ -28,9 +28,9 @@ class FoodMongo extends UuObjectDao {
   }
 
   /*LIST*/
-  async list(awid){
+  async list(awid, dtoIn){
     let filter = {
-      
+      ...dtoIn
     };
     return await super.find(filter);
   }

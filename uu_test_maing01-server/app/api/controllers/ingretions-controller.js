@@ -4,7 +4,6 @@ const IngretionsAbl = require("../../abl/ingretions-abl.js");
 class IngretionsController {
 
   get(ucEnv) {
-    console.log(ucEnv.getDtoIn());
     return IngretionsAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 

@@ -20,7 +20,6 @@ let EditNorms = createVisualComponent({
 
   render(props) {
     const { identity } = useSession();
-    console.log(identity);
 
     return (
         <Uu5Elements.Grid 
