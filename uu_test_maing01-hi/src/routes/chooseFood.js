@@ -1,8 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, useDataObject, useSession } from "uu5g05";
+import { createVisualComponent, useSession } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
-import Calls from "../calls.js";
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
 
@@ -45,9 +44,6 @@ let ChooseFood = createVisualComponent({
           <FoodType title="Obed 2"/>
           <FoodType title="Olovrant"/>
           <FoodType title="Večera"/>
-          <Uu5Elements.Button onClick={()=>{
-            handlerMap.loadFood({nazov: 'Pomaranče'}).then((data)=>console.log(data));
-          }}> awiu</Uu5Elements.Button>
         </Uu5Elements.Grid>
       </div>
     );

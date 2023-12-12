@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, createComponent, Fragment, useState, PropTypes } from "uu5g05";
+import { createVisualComponent, createComponent, useDataObject, Fragment, useState, PropTypes } from "uu5g05";
 
+import Calls from "../../calls.js";
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
 
@@ -70,6 +71,7 @@ const FoodPicker = createVisualComponent({
 
     let dataObject = useDataObject({
         handlerMap: {
+          load: Calls.getAllFoods,
           loadFood: (...args) => {
             return Calls.getAllFoods(...args);
           },
@@ -87,7 +89,11 @@ const FoodPicker = createVisualComponent({
             <div className={Css.main()}>
                 <Uu5Elements.Input type={"search"} placeholder={"Vyhľadaj jedlo"} className={Css.input()}/>
                 <Uu5Elements.ScrollableBox maxHeight="11.1rem">
-
+                  <Uu5Elements.Button onClick={()=>{
+                    handlerMap.loadFood({nazov: 'Pomaranče'}).then((data)=>console.log(data));
+                  }}></Uu5Elements.Button>
+                  
+                  {JSON.stringify(data)}
                 </Uu5Elements.ScrollableBox> 
             </div>
         </ModalOnButton>
