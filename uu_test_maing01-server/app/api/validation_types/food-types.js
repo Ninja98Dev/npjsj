@@ -29,7 +29,7 @@ const foodListDtoInType = shape({
     cislo: integer(5),
     nazov: string(100),
     norma: string(10),
-    kategoria: string(50),
+    kategoria: array(),
     rate: integer(1)
 });
 

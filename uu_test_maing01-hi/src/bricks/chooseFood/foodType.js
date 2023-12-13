@@ -115,12 +115,12 @@ const FoodType = createVisualComponent({
 
         <div className={Css.footer()}>
         <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`}>
-          <FoodPicker buttonProps={{tip:"Polievka", icon:"mdi-bowl", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Polievky"/>
-          <FoodPicker buttonProps={{tip:"Hlavné jedlo", icon:"mdi-food", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Hlavné jedlá"/>
-          <FoodPicker buttonProps={{tip:"Príloha", icon:"mdi-rice", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Prílohy"/>
-          <FoodPicker buttonProps={{tip:"Pečivo", icon:"mdi-food-croissant", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Pečivá"/>
-          <FoodPicker buttonProps={{tip:"Zákusok", icon:"mdi-food-apple", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Zákusky"/>
-          <FoodPicker buttonProps={{tip:"Voda", icon:"mdi-cup", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Vody"/>
+          <FoodPicker categories={["Polievky"]} buttonProps={{tip:"Polievka", icon:"mdi-bowl", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Polievky"/>
+          <FoodPicker categories={["Pokrmy z hovädzieho mäsa", "Pokrmy z bravčového mäsa", "Pokrmy z teľacieho mäsa", "Pokrmy z hydiny", "Pokrmy z rybieho mäsa", "Pokrmy z králika", "Pokrmy z vnútorností", "Pokrmy z mletého mäsa a polomäsité pokrmy", "Pokrmy bezmäsité", "Pokrmy múčne"]} buttonProps={{tip:"Hlavné jedlo", icon:"mdi-food", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Hlavné jedlá"/>
+          <FoodPicker categories={["Prílohy"]} buttonProps={{tip:"Príloha", icon:"mdi-rice", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Prílohy"/>
+          <FoodPicker categories={["Chlieb, pečivo"]} buttonProps={{tip:"Pečivo", icon:"mdi-food-croissant", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Pečivá"/>
+          <FoodPicker categories={["Doplnkové pokrmy"]} buttonProps={{tip:"Zákusok", icon:"mdi-food-apple", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Zákusky"/>
+          <FoodPicker categories={["Nápoje"]} buttonProps={{tip:"Voda", icon:"mdi-cup", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Vody"/>
           
           <Uu5Elements.Input effect="upper" colorScheme={"neutral"} significance="highlighted" width={"3rem"} placeholder="0" className={Css.input()}/>
         </Uu5Elements.ListItem>

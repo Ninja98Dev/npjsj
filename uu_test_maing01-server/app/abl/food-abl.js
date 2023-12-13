@@ -23,6 +23,8 @@ class FoodAbl {
 
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Create.InvalidDtoIn);
   
+    console.log(dtoIn);
+
     let foodResult;
     try{
       foodResult = await this.dao.create({...dtoIn, awid});

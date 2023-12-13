@@ -31,13 +31,31 @@ const ModalOnButton = createComponent({
 const Css = {
     main: () =>
         Config.Css.css`
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        `,
+    resultGrid: () =>
+        Config.Css.css`
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          align-items: center;
+          width: 35rem;
+          height: 30rem;
+        `,
+    item: () =>
+        Config.Css.css`
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: solid 0.1rem black;
+          padding: 0 0.5rem 0 0;
+          width: 100%;
         `,
     input: () =>
         Config.Css.css`
-            width: 35rem;
+          width: 35rem;
         `
 };
 //@@viewOff:css
@@ -54,6 +72,7 @@ const FoodPicker = createVisualComponent({
   //@@viewOn:propTypes
   propTypes: {
     buttonProps: PropTypes.object,
+    categories: PropTypes.array,
     header: PropTypes.string
   },
   //@@viewOff:propTypes
@@ -61,19 +80,19 @@ const FoodPicker = createVisualComponent({
   //@@viewOn:defaultProps
   defaultProps: {
     buttonProps: undefined,
+    categories: [""],
     header: "Vyber jedla"
   },
   //@@viewOff:defaultProps
 
   render(props) {
     //@@viewOn:private
-    const { buttonProps, header } = props;
+    const { buttonProps, categories, header } = props;
 
     let dataObject = useDataObject({
         handlerMap: {
-          load: Calls.getAllFoods,
-          loadFood: (...args) => {
-            return Calls.getAllFoods(...args);
+          searchFood: (...args) => {
+            return Calls.serachInFood(...args);
           },
         },
     });
@@ -86,16 +105,24 @@ const FoodPicker = createVisualComponent({
     //@@viewOn:render
     return (
         <ModalOnButton buttonProps={buttonProps} header={header} collapsible={false}>
-            <div className={Css.main()}>
-                <Uu5Elements.Input type={"search"} placeholder={"Vyhľadaj jedlo"} className={Css.input()}/>
-                <Uu5Elements.ScrollableBox maxHeight="11.1rem">
-                  <Uu5Elements.Button onClick={()=>{
-                    handlerMap.loadFood({nazov: 'Pomaranče'}).then((data)=>console.log(data));
-                  }}></Uu5Elements.Button>
-                  
-                  {JSON.stringify(data)}
-                </Uu5Elements.ScrollableBox> 
-            </div>
+          <Uu5Elements.Grid className={Css.main()}>
+            <Uu5Elements.Input type="search" placeholder="Vyhľadaj jedlo" className={Css.input()} onChange={(input) => 
+              state === "ready" || state === "readyNoData" ? handlerMap.searchFood({nazov: input.data.value, kategoria: categories}) : null } />
+            <Uu5Elements.ScrollableBox maxHeight="30rem">
+              <Uu5Elements.Grid className={Css.resultGrid()} templateColumns="repeat(1, 1fr)" flow="row" rowGap={0}>
+
+                {data ? (
+                  data.itemList.length > 0 ? data.itemList.map((food) => (
+                    <Uu5Elements.Grid.Item key={food.id} className={Css.item()}>
+                      <Uu5Elements.InfoItem title={food.nazov} subtitle={food.kategoria}/>
+                      <Uu5Elements.Button icon="uugds-plus" effect="upper" size="xs" primary="true" onClick={() => console.log("click")}>Pridať</Uu5Elements.Button>
+                    </Uu5Elements.Grid.Item>
+                    )) : <p>Požadované jedlo sa nenašlo</p>
+                ) : <p>Vyhľadaj jedlo</p> }
+
+              </ Uu5Elements.Grid>
+            </Uu5Elements.ScrollableBox> 
+          </Uu5Elements.Grid>
         </ModalOnButton>
     );
     //@@viewOff:render

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, BackgroundProvider } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
@@ -48,11 +48,14 @@ const Spa = createVisualComponent({
   //@@viewOff:statics
 
   //@@viewOn:propTypes
-  propTypes: {},
+  propTypes: {
+
+  },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
+
   },
   //@@viewOff:defaultProps
 
@@ -67,7 +70,9 @@ const Spa = createVisualComponent({
     return (
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
         <Uu5Elements.ModalBus>
+          <BackgroundProvider background="soft">
             <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
+          </BackgroundProvider>
         </Uu5Elements.ModalBus>
       </Plus4U5.SpaProvider>
     );

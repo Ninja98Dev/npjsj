@@ -31,14 +31,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoInData);
   },
 
-  getWorkspace() {
-    const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/get");
-    return Calls.call("get", commandUri);
-  },
-
-  getAllFoods(dtoInData){
+  serachInFood(dtoIn){
     const commandUri = Calls.getCommandUri("food/list");
-    return Calls.call("get", commandUri, dtoInData);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   async initAndGetWorkspace(dtoInData) {

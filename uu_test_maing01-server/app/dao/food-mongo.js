@@ -30,9 +30,14 @@ class FoodMongo extends UuObjectDao {
   /*LIST*/
   async list(awid, dtoIn){
     let filter = {
-      ...dtoIn
+      ...dtoIn,
+      nazov: { $regex : new RegExp(dtoIn.nazov, "i") },
+      kategoria: { $in : dtoIn.kategoria }
     };
-    return await super.find(filter);
+    let pageInfo = {
+      pageSize : 50
+    }
+    return await super.find(filter, pageInfo);
   }
   
   /*DELETE*/
