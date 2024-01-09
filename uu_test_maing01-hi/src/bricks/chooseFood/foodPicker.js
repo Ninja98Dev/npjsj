@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, createComponent, useDataObject, Fragment, useState, PropTypes } from "uu5g05";
+import Uu5, { createVisualComponent, createComponent, useDataObject, Fragment, useState, PropTypes } from "uu5g05";
 
 import Calls from "../../calls.js";
 import Config from "../config/config.js";
@@ -11,13 +11,17 @@ import ButtonToolTip from "../buttonToolTip.js";
 
 //@@viewOn:constants
 const ModalOnButton = createComponent({
-    render({ header, buttonProps, ...props }) {
+    render({ category, subcategories, icon, ...props }) {
       const [open, setOpen] = useState();
-
+      const allCategories = subcategories.toString()
+        .replaceAll("Pokrmy ", "")
+        .replaceAll("mäsa", "")
+        .replaceAll(",", ", ")
+        .replace("z", "Z");
       return (
         <Fragment>
-          <ButtonToolTip {...buttonProps} onClick={() => setOpen(true)}/> 
-          <Uu5Elements.Modal {...props} header={header} open={open} onClose={() => setOpen(false)}>
+          <ButtonToolTip tip={category} icon={icon} effect="upper" colorScheme="neutral" significance="highlighted" onClick={() => setOpen(true)}/> 
+          <Uu5Elements.Modal {...props} header={(<Uu5Elements.InfoItem title={category} subtitle={allCategories} />)} open={open} onClose={() => setOpen(false)}>
             {props.children}
           </Uu5Elements.Modal>
         </Fragment>
@@ -71,23 +75,30 @@ const FoodPicker = createVisualComponent({
 
   //@@viewOn:propTypes
   propTypes: {
-    buttonProps: PropTypes.object,
-    categories: PropTypes.array,
-    header: PropTypes.string
+    category: PropTypes.string,
+    subcategories: PropTypes.array,
+    icon: PropTypes.string,
+    addFood: PropTypes.func
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
-    buttonProps: undefined,
-    categories: [""],
-    header: "Vyber jedla"
+    category: "None",
+    subcategories: [""],
+    icon: undefined,
+    addFood: undefined
   },
   //@@viewOff:defaultProps
 
   render(props) {
     //@@viewOn:private
-    const { buttonProps, categories, header } = props;
+    const { 
+      category,
+      subcategories,
+      icon,
+      addFood
+     } = props;
 
     let dataObject = useDataObject({
         handlerMap: {
@@ -104,22 +115,20 @@ const FoodPicker = createVisualComponent({
 
     //@@viewOn:render
     return (
-        <ModalOnButton buttonProps={buttonProps} header={header} collapsible={false}>
+        <ModalOnButton category={category} subcategories={subcategories} icon={icon} collapsible={false}>
           <Uu5Elements.Grid className={Css.main()}>
             <Uu5Elements.Input type="search" placeholder="Vyhľadaj jedlo" className={Css.input()} onChange={(input) => 
-              state === "ready" || state === "readyNoData" ? handlerMap.searchFood({nazov: input.data.value, kategoria: categories}) : null } />
+              state === "ready" || state === "readyNoData" ? handlerMap.searchFood({nazov: input.data.value, kategoria: [category, ...subcategories]}) : null } />
             <Uu5Elements.ScrollableBox maxHeight="30rem">
               <Uu5Elements.Grid className={Css.resultGrid()} templateColumns="repeat(1, 1fr)" flow="row" rowGap={0}>
-
                 {data ? (
                   data.itemList.length > 0 ? data.itemList.map((food) => (
                     <Uu5Elements.Grid.Item key={food.id} className={Css.item()}>
                       <Uu5Elements.InfoItem title={food.nazov} subtitle={food.kategoria}/>
-                      <Uu5Elements.Button icon="uugds-plus" effect="upper" size="xs" primary="true" onClick={() => console.log("click")}>Pridať</Uu5Elements.Button>
+                      <Uu5Elements.Button icon="uugds-plus" effect="upper" size="xs" colorScheme="blue" onClick={() => addFood(food)}>Pridať</Uu5Elements.Button>
                     </Uu5Elements.Grid.Item>
                     )) : <p>Požadované jedlo sa nenašlo</p>
                 ) : <p>Vyhľadaj jedlo</p> }
-
               </ Uu5Elements.Grid>
             </Uu5Elements.ScrollableBox> 
           </Uu5Elements.Grid>

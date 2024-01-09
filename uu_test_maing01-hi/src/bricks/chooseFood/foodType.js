@@ -1,15 +1,99 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes } from "uu5g05";
+import { createVisualComponent, PropTypes, useCallback, useState } from "uu5g05";
 
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
 
 import FoodPicker from "./foodPicker.js";
-import ButtonToolTip from "../buttonToolTip.js";
 import FoodItem from "./foodItem.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
+/*
+  Polievky: 
+  Hlavné jedlá:
+    Pokrmy z hovädzieho mäsa
+		Pokrmy z bravčového mäsa
+		Pokrmy z teľacieho mäsa
+		Pokrmy z hydiny
+		Pokrmy z rybieho mäsa
+		Pokrmy z králika
+		Pokrmy z vnútorností
+		Pokrmy z mletého mäsa a polomäsité pokrmy
+		Pokrmy bezmäsité
+		Pokrmy múčne
+		Studené hlavné jedlá
+		Pokrmy zo zveriny
+  Prílohy:
+    Závarky
+    Posýpky
+    Prívarky
+    Omáčky
+    Kompóty
+  Chlieb, pečivo:
+    Nátierky, oblohy, bagety
+  Doplnkové pokrmy:
+    Ovocie
+		Mučniky
+  Nápoje: 
+*/
+
+const foodPickers = [
+  {
+    category : "Polievky",
+    subcategories : [],
+    icon: "mdi-bowl"
+  },
+  {
+    category : "Hlavné jedlá",
+    subcategories : [
+      "Pokrmy z hovädzieho mäsa",
+      "Pokrmy z bravčového mäsa",
+      "Pokrmy z teľacieho mäsa",
+      "Pokrmy z hydiny",
+      "Pokrmy z rybieho mäsa",
+      "Pokrmy z králika",
+      "Pokrmy z vnútorností",
+      "Pokrmy z mletého mäsa a polomäsité pokrmy",
+      "Pokrmy bezmäsité",
+      "Pokrmy múčne",
+      "Studené hlavné jedlá",
+      "Pokrmy zo zveriny"
+    ],
+    icon: "mdi-food"
+  },
+  {
+    category : "Prílohy",
+    subcategories : [
+      "Závarky",
+      "Posýpky",
+      "Prívarky",
+      "Omáčky",
+      "Kompóty"
+    ],
+    icon: "mdi-rice"
+  },
+  {
+    category : "Chlieb, pečivo",
+    subcategories : [
+      "Nátierky, oblohy, bagety"
+    ],
+    icon: "mdi-food-croissant"
+  },
+  {
+    category : "Doplnkové pokrmy",
+    subcategories : [
+      "Ovocie",
+      "Mučniky"
+    ],
+    icon: "mdi-food-apple"
+  },
+  {
+    category : "Nápoje",
+    subcategories : [],
+    icon: "mdi-cup"
+  }
+] 
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -79,6 +163,18 @@ const FoodType = createVisualComponent({
     const { title } = props;
     //@@viewOff:private
 
+    const [items, setItems] = useState([
+      { value: '' },
+      { value: '' },
+      { value: '' }
+    ])
+
+     const addFood = useCallback((id, value) => {
+        setItems(prevItems => prevItems.map((item, index) => {
+          return {item : { value: 'a' }}
+        }))
+      }, []) // No dependencies
+
     //@@viewOn:interface
     //@@viewOff:interface
 
@@ -91,37 +187,17 @@ const FoodType = createVisualComponent({
         
         <div className={Css.body()}>
           <Uu5Elements.ScrollableBox maxHeight="11.1rem">
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
-            <FoodItem icon={"mdi-food"} type={"Halušky"}/>
+            {items.map((item, index) => (
+              <FoodItem key={index} type={item.value}/>
+            ))}
           </Uu5Elements.ScrollableBox>
         </div>
 
         <div className={Css.footer()}>
         <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`}>
-          <FoodPicker categories={["Polievky"]} buttonProps={{tip:"Polievka", icon:"mdi-bowl", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Polievky"/>
-          <FoodPicker categories={["Pokrmy z hovädzieho mäsa", "Pokrmy z bravčového mäsa", "Pokrmy z teľacieho mäsa", "Pokrmy z hydiny", "Pokrmy z rybieho mäsa", "Pokrmy z králika", "Pokrmy z vnútorností", "Pokrmy z mletého mäsa a polomäsité pokrmy", "Pokrmy bezmäsité", "Pokrmy múčne"]} buttonProps={{tip:"Hlavné jedlo", icon:"mdi-food", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Hlavné jedlá"/>
-          <FoodPicker categories={["Prílohy"]} buttonProps={{tip:"Príloha", icon:"mdi-rice", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Prílohy"/>
-          <FoodPicker categories={["Chlieb, pečivo"]} buttonProps={{tip:"Pečivo", icon:"mdi-food-croissant", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Pečivá"/>
-          <FoodPicker categories={["Doplnkové pokrmy"]} buttonProps={{tip:"Zákusok", icon:"mdi-food-apple", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Zákusky"/>
-          <FoodPicker categories={["Nápoje"]} buttonProps={{tip:"Voda", icon:"mdi-cup", effect:"upper", colorScheme:"neutral", significance:"highlighted"}} header="Vody"/>
-          
+          {foodPickers.map(foodPicker => (
+            <FoodPicker category={foodPicker.category} subcategories={foodPicker.subcategories} icon={foodPicker.icon} addFood={addFood} />
+          ))}
           <Uu5Elements.Input effect="upper" colorScheme={"neutral"} significance="highlighted" width={"3rem"} placeholder="0" className={Css.input()}/>
         </Uu5Elements.ListItem>
         </div>
