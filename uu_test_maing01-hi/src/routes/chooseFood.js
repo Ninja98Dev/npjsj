@@ -7,6 +7,8 @@ import Uu5Elements from "uu5g05-elements";
 
 import FoodType from "../bricks/chooseFood/foodType.js";
 
+import BackButton from "./backButton.js"
+
 const Css = {
   panel: () =>
     Config.Css.css`
@@ -45,6 +47,7 @@ let ChooseFood = createVisualComponent({
           <FoodType title="Olovrant"/>
           <FoodType title="Večera"/>
         </Uu5Elements.Grid>
+		{BackButton()}
       </div>
     );
   },
