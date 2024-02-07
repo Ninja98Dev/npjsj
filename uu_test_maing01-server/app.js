@@ -5,99 +5,60 @@ appServer.start();
 const IngretionsAbl = require('./app/abl/ingretions-abl');
 const FoodAbl = require('./app/abl/food-abl');
 const awid = "22222222222222222222222222222222";
-/*
-const input = {
-    skola : [
-        {
-            type: "A",
-            name: "materska",
-            strava: [
-                {
-                    type: "ranajky",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "desiata",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "obed",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "olovrant",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                }
-            ]
-        },
-        {
-            type: "C",
-            name: "stredna",
-            strava: [
-                {
-                    type: "ranajky",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "desiata",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "obed",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "olovrant",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-                {
-                    type: "večera",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}, {kod:"66460", voda:false}]//kod normy
-                },
-            ]
-        }
-    ]
-}
-*/
 
-const input = {
-    skola : [
-        {
-            type: "A",
-            name: "materska",
-            strava: [
-                {
-                    type: "ranajky",
-                    pocet: "15" ,
-                    vody: 2,
-                    normy: [{kod:"66460", voda:true}]//kod normy
-                }
-            ]
-        }
-    ]
-}
+let schools = [
+    {
+        name: "Materska škola",
+        category: "A",
+        foodTypes: [
+            {
+                title: "Desiata",
+                foods: [],
+                boarders: 0
+            },
+            {
+                title: "Obed",
+                foods: [{kod:"66460"}],
+                boarders: 1
+            },
+            {
+                title: "Olovrant",
+                foods: [],
+                boarders: 0
+            }
+        ]
+    },
+    {
+        name: "Stredna škola",
+        category: "C",
+        foodTypes: [
+            {
+                title: "Raňajky",
+                foods: [],
+                boarders: 0
+            },
+            {
+                title: "Obed 1",
+                foods: [],
+                boarders: 0
+            },
+            {
+                title: "Obed 2",
+                foods: [],
+                boarders: 0
+            },
+            {
+                title: "Večera",
+                foods: [],
+                boarders: 0
+            }
+        ]
+    }
+];
 
-function calculateIngretionQuantity(ingretion, trieda, count){
+function calculateIngretionQuantity(ingretion, category, boarders){
     let quantity = 0;
-    switch(trieda){
+    switch(category){
         case "A":
             quantity = ingretion.ahruba;
             break;
@@ -111,19 +72,21 @@ function calculateIngretionQuantity(ingretion, trieda, count){
             quantity = ingretion.dhruba;
             break;
     }
-    return (count*quantity)/100;
+    return (boarders*quantity)/100;
 }
 
-async function getAllIngretions(norma, trieda, count, vody){
+async function getAllIngretions(food, category, boarders){
     return new Promise(async (resolve) => {
-        let dtoIn = { kod: norma.kod }
+        let dtoIn = { kod: food.kod }
         let daoIngretions = await IngretionsAbl.list(awid, dtoIn);
         let ingretions = [];
         daoIngretions.itemList.forEach(ingretion => {
-            let quantity = calculateIngretionQuantity(ingretion, trieda, count);
+            let quantity = calculateIngretionQuantity(ingretion, category, boarders);
+            /*
             if(norma.voda){
                 quantity = quantity/vody;
             }
+            */
             const newIngretion = {
                 id: ingretion.id,
                 mj: ingretion.mj,
@@ -136,29 +99,39 @@ async function getAllIngretions(norma, trieda, count, vody){
         // obkejt s {id, mnozstvo}
     });
 }
-async function calculateIngretions(input) {
-    const ingretionCounts = {};
-    for (const skola of input.skola) {
-      for (const strava of skola.strava) {
-        for (const norma of strava.normy) {
-          const result = await getAllIngretions(norma, skola.type, strava.pocet, strava.vody);
-          for (const ingretion of result) {
-            if (ingretionCounts[ingretion.id]) {
-                ingretionCounts[ingretion.id].quantity += parseFloat(ingretion.quantity);
-            } else {
-                ingretionCounts[ingretion.id] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj, name:ingretion.name};
-            }
-          }
+async function calculateIngretions(schools) {
+    const output = [];
+    for (const school of schools) {
+        let newSchool = {
+            name: school.name,
+            foodTypes: []
         }
-      }
+        for (const foodType of school.foodTypes) {
+            let newFoodType = {
+                title: foodType.title,
+                ingretions: []
+            }
+            for (const food of foodType.foods) {
+                const result = await getAllIngretions(food, school.category, foodType.boarders);
+                for (const ingretion of result) {
+                    if (newFoodType.ingretions[ingretion.id]) {
+                        newFoodType.ingretions[ingretion.id].quantity += parseFloat(ingretion.quantity);
+                    } else {
+                        newFoodType.ingretions[ingretion.id] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj, name:ingretion.name};
+                    }
+                }
+            }
+            newSchool.foodTypes.push(newFoodType);
+        }
+        output.push(newSchool);
     }
-    const ingretions = Object.entries(ingretionCounts).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
-    return ingretions;
+    //const ingretions = Object.entries(ingretionCounts).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
+    return output;
   }
 
 async function test(){
-    calculateIngretions(input).then((result) =>{
-        //console.log(result);
+    calculateIngretions(schools).then((result) =>{
+        console.log(...result);
     });
 }
 test();

@@ -17,7 +17,7 @@ class IngretionsMongo extends UuObjectDao {
   /*LIST*/
   async list(dtoIn){
     let filter = {
-      kod: dtoIn.kod
+      kod: Number(dtoIn.kod)
     };
     return await super.find(filter);
   }
