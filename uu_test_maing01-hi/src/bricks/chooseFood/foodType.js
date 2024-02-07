@@ -4,6 +4,7 @@ import { createVisualComponent, PropTypes, useCallback, useState } from "uu5g05"
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
 
+import FoodCont from './foodCont.js';
 import FoodPicker from "./foodPicker.js";
 import FoodItem from "./foodItem.js";
 //@@viewOff:imports
@@ -102,10 +103,12 @@ const Css = {
         flex-direction: column;
         border-radius: 1rem;
         display: flex;
-        width: 100%;
         height: 18.5rem;
+        min-width: 20rem;
+        width: fit-content;
         color: white;
         margin-top: 1rem;
+        margin: 1rem;
     `,
     header: () => Config.Css.css`
         background-color: #404040;
@@ -149,31 +152,28 @@ const FoodType = createVisualComponent({
   //@@viewOn:propTypes
   propTypes: {
     title : PropTypes.string,
+    school : PropTypes.string
   },
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
   defaultProps: {
     title : "Default title",
+    school : undefined
   },
   //@@viewOff:defaultProps
 
   render(props) {
     //@@viewOn:private
-    const { title } = props;
+    const { title, school } = props;
     //@@viewOff:private
 
-    const [items, setItems] = useState([
-      { value: '' },
-      { value: '' },
-      { value: '' }
-    ])
+    const [foods, setFoods] = useState([]);
 
-     const addFood = useCallback((id, value) => {
-        setItems(prevItems => prevItems.map((item, index) => {
-          return {item : { value: 'a' }}
-        }))
-      }, []) // No dependencies
+    const addFood = useCallback((food, icon) => {
+      setFoods(prevItems => [...prevItems, {icon,nazov:food.nazov}]);
+      FoodCont.addFood(school, title, food);
+    }, []) // No dependencies
 
     //@@viewOn:interface
     //@@viewOff:interface
@@ -187,18 +187,18 @@ const FoodType = createVisualComponent({
         
         <div className={Css.body()}>
           <Uu5Elements.ScrollableBox maxHeight="11.1rem">
-            {items.map((item, index) => (
-              <FoodItem key={index} type={item.value}/>
+            {foods.map(food => (
+              <FoodItem type={food.nazov} icon={food.icon}/>
             ))}
           </Uu5Elements.ScrollableBox>
         </div>
 
         <div className={Css.footer()}>
-        <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`}>
+        <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`} colorScheme="building" significance="subdued">
           {foodPickers.map(foodPicker => (
             <FoodPicker category={foodPicker.category} subcategories={foodPicker.subcategories} icon={foodPicker.icon} addFood={addFood} />
           ))}
-          <Uu5Elements.Input effect="upper" colorScheme={"neutral"} significance="highlighted" width={"3rem"} placeholder="0" className={Css.input()}/>
+          <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()}/>
         </Uu5Elements.ListItem>
         </div>
       </div>

@@ -19,7 +19,7 @@ const EditNorms = Utils.Component.lazy(() => import("../routes/editNorms.js"));
 const Stats = Utils.Component.lazy(() => import("../routes/stats.js"));
 
 const ROUTE_MAP = {
-  "": { redirect: "menu" },
+  "": { redirect: "home" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props}/>,
