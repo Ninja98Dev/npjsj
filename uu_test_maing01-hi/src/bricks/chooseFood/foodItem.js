@@ -13,6 +13,7 @@ import Uu5Elements, { Number } from "uu5g05-elements";
 const Css = {
     main: () => Config.Css.css`
       margin: 0.5rem 0.85rem 0 0.5rem;
+      overflow: hidden;
       align-items: center;
       display: flex;
       height: fit-content;
@@ -27,6 +28,7 @@ const Css = {
 
     text: () => Config.Css.css`
       border-bottom: solid 0.05rem white;
+      white-space: nowrap;
       display: flex;
       height: 100%;
       width: 100%;

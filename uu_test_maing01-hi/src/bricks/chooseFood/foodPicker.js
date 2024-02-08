@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import Uu5, { createVisualComponent, createComponent, useDataObject, Fragment, useState, PropTypes } from "uu5g05";
+import Uu5, { createVisualComponent, useDataObject, Fragment, useState, PropTypes } from "uu5g05";
 
 import Calls from "../../calls.js";
 import Config from "../config/config.js";
@@ -10,25 +10,6 @@ import ButtonToolTip from "../buttonToolTip.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const ModalOnButton = createComponent({
-    render({ category, subcategories, icon, ...props }) {
-      const [open, setOpen] = useState();
-      const allCategories = subcategories.toString()
-        .replaceAll("Pokrmy ", "")
-        .replaceAll("mäsa", "")
-        .replaceAll(",", ", ")
-        .replace("z", "Z");
-      return (
-        <Fragment>
-          <ButtonToolTip tip={category} icon={icon} effect="upper" colorScheme="neutral" significance="highlighted" onClick={() => setOpen(true)}/> 
-          <Uu5Elements.Modal {...props} header={(<Uu5Elements.InfoItem title={category} subtitle={allCategories} />)} open={open} onClose={() => setOpen(false)}>
-            {props.children}
-          </Uu5Elements.Modal>
-        </Fragment>
-      );
-
-    },
-  });
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -108,6 +89,13 @@ const FoodPicker = createVisualComponent({
         },
     });
     let { state, data, errorData, pendingData, handlerMap } = dataObject;
+
+    const [open, setOpen] = useState();
+    const allCategories = subcategories.toString()
+      .replaceAll("Pokrmy ", "")
+      .replaceAll("mäsa", "")
+      .replaceAll(",", ", ")
+      .replace("z", "Z");
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -115,24 +103,28 @@ const FoodPicker = createVisualComponent({
 
     //@@viewOn:render
     return (
-        <ModalOnButton category={category} subcategories={subcategories} icon={icon} collapsible={false}>
-          <Uu5Elements.Grid className={Css.main()}>
-            <Uu5Elements.Input type="search" placeholder="Vyhľadaj jedlo" className={Css.input()} onChange={(input) => 
-              state === "ready" || state === "readyNoData" ? handlerMap.searchFood({nazov: input.data.value, kategoria: [category, ...subcategories]}) : null } />
-            <Uu5Elements.ScrollableBox maxHeight="30rem">
-              <Uu5Elements.Grid className={Css.resultGrid()} templateColumns="repeat(1, 1fr)" flow="row" rowGap={0}>
-                {data ? (
-                  data.itemList.length > 0 ? data.itemList.map((food) => (
-                    <Uu5Elements.Grid.Item key={food.id} className={Css.item()}>
-                      <Uu5Elements.InfoItem title={food.nazov} subtitle={food.kategoria}/>
-                      <Uu5Elements.Button icon="uugds-plus" effect="upper" size="xs" colorScheme="blue" onClick={() => addFood(food)}>Pridať</Uu5Elements.Button>
-                    </Uu5Elements.Grid.Item>
-                    )) : <p>Požadované jedlo sa nenašlo</p>
-                ) : <p>Vyhľadaj jedlo</p> }
-              </ Uu5Elements.Grid>
-            </Uu5Elements.ScrollableBox> 
-          </Uu5Elements.Grid>
-        </ModalOnButton>
+      <Fragment>
+          <ButtonToolTip tip={category} icon={icon} effect="upper" onClick={() => setOpen(true)}/> 
+          <Uu5Elements.Modal {...props} header={(<Uu5Elements.InfoItem title={category} subtitle={allCategories} />)} open={open} onClose={() => setOpen(false)}>
+            <Uu5Elements.Grid className={Css.main()}>
+              <Uu5Elements.Input type="search" placeholder="Vyhľadaj jedlo" className={Css.input()} onChange={(input) => 
+                state === "ready" || state === "readyNoData" ? handlerMap.searchFood({nazov: input.data.value, kategoria: [category, ...subcategories]}) : null } />
+              <Uu5Elements.ScrollableBox maxHeight="30rem">
+                <Uu5Elements.Grid className={Css.resultGrid()} templateColumns="repeat(1, 1fr)" flow="row" rowGap="0">
+                  {data ? (
+                    data.itemList.length > 0 ? data.itemList.map((food) => (
+                      <Uu5Elements.Grid.Item key={food.id} className={Css.item()}>
+                        <Uu5Elements.InfoItem title={food.nazov} subtitle={food.kategoria}/>
+                        <Uu5Elements.Button icon="uugds-plus" effect="upper" size="xs" colorScheme="blue" onClick={() => {addFood(food, icon); setOpen(false)}}>Pridať</Uu5Elements.Button>
+                      </Uu5Elements.Grid.Item>
+                      )) : <p>Požadované jedlo sa nenašlo</p>
+                  ) : <p>Vyhľadaj jedlo</p> }
+                </ Uu5Elements.Grid>
+              </Uu5Elements.ScrollableBox> 
+            </Uu5Elements.Grid>
+              {props.children}
+          </Uu5Elements.Modal>
+        </Fragment>
     );
     //@@viewOff:render
   },

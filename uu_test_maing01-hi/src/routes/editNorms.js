@@ -4,6 +4,7 @@ import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
+import { BackButton } from "./backButton.js";
 
 const Css = {
   icon: () =>
@@ -27,6 +28,7 @@ let EditNorms = createVisualComponent({
         justifyContent="center"
         alignContent="center">
             <h1>Úprava jedál</h1>
+            {BackButton()}
         </Uu5Elements.Grid>
     );
   },

@@ -36,6 +36,11 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  generatePDF(dtoInData){
+    const commandUri = Calls.getCommandUri("pdf/generate");
+    return Calls.call("get", commandUri, dtoInData);
+  },
+
   async initAndGetWorkspace(dtoInData) {
     await Calls.initWorkspace(dtoInData);
     return await Calls.getWorkspace();

@@ -1,60 +1,18 @@
-const appServer = require("uu_appg01_server");
+"use strict";
 
-appServer.start();
-
-const IngretionsAbl = require('./app/abl/ingretions-abl');
-const FoodAbl = require('./app/abl/food-abl');
-const awid = "22222222222222222222222222222222";
-
-let schools = [
-    {
-        name: "Materska škola",
-        category: "A",
-        foodTypes: [
-            {
-                title: "Desiata",
-                foods: [],
-                boarders: 0
-            },
-            {
-                title: "Obed",
-                foods: [{kod:"66460"}],
-                boarders: 1
-            },
-            {
-                title: "Olovrant",
-                foods: [],
-                boarders: 0
-            }
-        ]
-    },
-    {
-        name: "Stredna škola",
-        category: "C",
-        foodTypes: [
-            {
-                title: "Raňajky",
-                foods: [],
-                boarders: 0
-            },
-            {
-                title: "Obed 1",
-                foods: [],
-                boarders: 0
-            },
-            {
-                title: "Obed 2",
-                foods: [],
-                boarders: 0
-            },
-            {
-                title: "Večera",
-                foods: [],
-                boarders: 0
-            }
-        ]
+class PdfController {
+    
+    async generate(data) {
+        const schools = data.getDtoIn()[''];
+        const test = await calculateIngretions(schools);
+        console.log(...test);
     }
-];
+
+}
+
+const IngretionsAbl = require('../../abl/ingretions-abl');
+const FoodAbl = require('../../abl/food-abl');
+const awid = "22222222222222222222222222222222";
 
 function calculateIngretionQuantity(ingretion, category, boarders){
     let quantity = 0;
@@ -111,13 +69,15 @@ async function calculateIngretions(schools) {
                 title: foodType.title,
                 ingretions: []
             }
-            for (const food of foodType.foods) {
-                const result = await getAllIngretions(food, school.category, foodType.boarders);
-                for (const ingretion of result) {
-                    if (newFoodType.ingretions[ingretion.id]) {
-                        newFoodType.ingretions[ingretion.id].quantity += parseFloat(ingretion.quantity);
-                    } else {
-                        newFoodType.ingretions[ingretion.id] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj, name:ingretion.name};
+            if(foodType.foods && foodType.foods.length > 0){
+                for (const food of foodType.foods) {
+                    const result = await getAllIngretions(food, school.category, foodType.boarders);
+                    for (const ingretion of result) {
+                        if (newFoodType.ingretions[ingretion.id]) {
+                            newFoodType.ingretions[ingretion.id].quantity += parseFloat(ingretion.quantity);
+                        } else {
+                            newFoodType.ingretions[ingretion.id] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj, name:ingretion.name};
+                        }
                     }
                 }
             }
@@ -129,8 +89,4 @@ async function calculateIngretions(schools) {
     return output;
   }
 
-async function test(){
-    calculateIngretions(schools).then((result) =>{
-        console.log(...result);
-    });
-}
+module.exports = new PdfController();

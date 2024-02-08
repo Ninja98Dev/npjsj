@@ -80,6 +80,11 @@
         "realization": "api/controllers/NutritionsController.nutritions",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "pdf/generate":{
+        "realization": "api/controllers/PdfController.generate",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

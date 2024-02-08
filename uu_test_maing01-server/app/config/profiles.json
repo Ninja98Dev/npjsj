@@ -68,7 +68,11 @@
       },
       "ingretions": {
         "sysStateList": ["active"],
-        "profileList": ["public"]
+        "profileList": ["Public"]
+      },
+      "pdf/generate": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }
