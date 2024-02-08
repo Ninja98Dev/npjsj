@@ -62,9 +62,20 @@ let ChooseFood = createVisualComponent({
   render(props) {
     const { identity } = useSession();
     return (
-      <BackgroundProvider background="dark">
-        <Uu5Elements.Tabs type="line" className={Css.Tabs()} itemList={schoolTabs}  actionList={[{ icon: "uugds-check", children:"Pokračovať", collapsedChildren: "Info", onClick: () => Calls.generatePDF(FoodCont.getSchools()) }]}/> 
-      </BackgroundProvider>
+      <div className={Css.panel()}>
+        <Uu5Elements.Grid 
+        templateColumns="repeat(3, 20rem)"
+        justifyContent="center"
+        alignContent="center"
+        className={Css.grid()}>
+          <FoodType title="Raňajky"/>
+          <FoodType title="Desiata"/>
+          <FoodType title="Obed 1"/>
+          <FoodType title="Obed 2"/>
+          <FoodType title="Olovrant"/>
+          <FoodType title="Večera"/>
+        </Uu5Elements.Grid>
+      </div>
     );
   },
 });
