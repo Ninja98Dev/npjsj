@@ -1,10 +1,10 @@
 //@@viewOn:imports
-import { BackgroundProvider, createVisualComponent, useSession } from "uu5g05";
+import { BackgroundProvider, createVisualComponent, useSession, useEffect } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
-import Uu5Forms from "uu5g05-forms";
+import Uu5Forms, { useFormApi } from "uu5g05-forms";
 
 import Calls from "../calls.js";
 import FoodType from "../bricks/chooseFood/foodType.js";
@@ -61,21 +61,33 @@ let ChooseFood = createVisualComponent({
 
   render(props) {
     const { identity } = useSession();
+
     return (
-      <div className={Css.panel()}>
-        <Uu5Elements.Grid 
-        templateColumns="repeat(3, 20rem)"
-        justifyContent="center"
-        alignContent="center"
-        className={Css.grid()}>
-          <FoodType title="Raňajky"/>
-          <FoodType title="Desiata"/>
-          <FoodType title="Obed 1"/>
-          <FoodType title="Obed 2"/>
-          <FoodType title="Olovrant"/>
-          <FoodType title="Večera"/>
-        </Uu5Elements.Grid>
-      </div>
+      <Uu5Forms.Form.Provider
+        onSubmit={(e) => {
+          if (!navigator.onLine) throw new Error("Demo submit error example.");
+          alert("Submitted with values:\n" + JSON.stringify(e.data.value, null, 2));
+          props.onClose();
+        }}
+      >
+        <div>
+          <Uu5Forms.FormRadios
+            name="ado"
+            label="Gender"
+            itemList={[
+              { value: "man", label: "For Man" },
+              { value: "woman", label: "For Woman" },
+            ]}
+            required
+          />
+        </div>
+          <Uu5Forms.SubmitButton>Buy</Uu5Forms.SubmitButton>
+      <BackgroundProvider background="dark">
+        <Uu5Elements.Tabs type="line" className={Css.Tabs()} itemList={schoolTabs} 
+          actionList={[{icon:'uugds-check', children:'Pokračovať', onClick: ()=>{Calls.generatePDF(FoodCont.getSchools)}}]}/> 
+      </BackgroundProvider>
+        
+      </Uu5Forms.Form.Provider>
     );
   },
 });
