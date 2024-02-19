@@ -654,7 +654,7 @@ module.exports = JSON.parse('{"appName":"Application uuTest","About":{"header":"
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "chunks/index/" + chunkId + "-" + {"routes_about_js":"05a9a7e201545d2432a4","routes_menu_js":"707db4c03e9233ca9381","routes_chooseFood_js":"20d2e82235d307b9afc9","routes_init-app-workspace_js":"be21047c8a1f38a36945","routes_control-panel_js":"978bdbf9cb7b68a68941","routes_editNorms_js":"1b73d779a035c16bba7a","routes_stats_js":"0b89b1be55e064a8d09f","lsi_cs_json":"9e4a4f4ad1208f9ecc40"}[chunkId] + ".js";
+/******/ 			return "chunks/index/" + chunkId + "-" + {"routes_about_js":"05a9a7e201545d2432a4","routes_menu_js":"707db4c03e9233ca9381","routes_chooseFood_js":"b6f55a3f7f894be32859","routes_init-app-workspace_js":"be21047c8a1f38a36945","routes_control-panel_js":"978bdbf9cb7b68a68941","routes_editNorms_js":"c05573457df3df06a166","routes_stats_js":"0b89b1be55e064a8d09f","lsi_cs_json":"9e4a4f4ad1208f9ecc40"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -674,7 +674,7 @@ module.exports = JSON.parse('{"appName":"Application uuTest","About":{"header":"
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("7f7a3f5a54849b33e607")
+/******/ 		__webpack_require__.h = () => ("37144f2930367e44c5fb")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/harmony module decorator */
