@@ -40,8 +40,8 @@ let Home = createVisualComponent({
         justifyContent="center"
         alignContent="center"
         className={Css.grid()}>
-            <Uu5Elements.Button href={"./chooseFood"} size="xl" significance="highlighted" colorScheme="primary" effect="ground">VYBER JEDLA</Uu5Elements.Button>
-            <Uu5Elements.Button href={"./editNorms"} size="xl" significance="highlighted" colorScheme="primary" effect="ground">UPRAVA NORIEM</Uu5Elements.Button>
+            <Uu5Elements.Button href={"./chooseFood"} size="xl" significance="highlighted" colorScheme="primary" effect="ground">VÝBER JEDLA</Uu5Elements.Button>
+            <Uu5Elements.Button href={"./editNorms"} size="xl" significance="highlighted" colorScheme="primary" effect="ground">ÚPRAVA NORIEM</Uu5Elements.Button>
             <Uu5Elements.Button href={"./stats"} size="xl" significance="highlighted" colorScheme="primary">ŠTATISTIKA</Uu5Elements.Button>
         </Uu5Elements.Grid>
       </div>

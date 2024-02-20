@@ -4,8 +4,9 @@ class PdfController {
     
     async generate(data) {
         const schools = data.getDtoIn()[''];
-        const test = await calculateIngretions(schools);
-        console.log(...test);
+        const output = await calculateIngretions(schools);
+        //console.log(...output);
+        console.log(...output);
     }
 
 }
@@ -33,18 +34,18 @@ function calculateIngretionQuantity(ingretion, category, boarders){
     return (boarders*quantity)/100;
 }
 
-async function getAllIngretions(food, category, boarders){
+async function getAllIngretions(food, category, foodType){
     return new Promise(async (resolve) => {
         let dtoIn = { kod: food.kod }
         let daoIngretions = await IngretionsAbl.list(awid, dtoIn);
         let ingretions = [];
         daoIngretions.itemList.forEach(ingretion => {
-            let quantity = calculateIngretionQuantity(ingretion, category, boarders);
-            /*
-            if(norma.voda){
-                quantity = quantity/vody;
+            let quantity = calculateIngretionQuantity(ingretion, category, foodType.boarders);
+
+            if(food.water){
+                quantity = quantity/foodType.waters;
             }
-            */
+
             const newIngretion = {
                 id: ingretion.id,
                 mj: ingretion.mj,
@@ -58,7 +59,7 @@ async function getAllIngretions(food, category, boarders){
     });
 }
 async function calculateIngretions(schools) {
-    const output = [];
+    const output = {schools:[]};
     for (const school of schools) {
         let newSchool = {
             name: school.name,
@@ -71,7 +72,7 @@ async function calculateIngretions(schools) {
             }
             if(foodType.foods && foodType.foods.length > 0){
                 for (const food of foodType.foods) {
-                    const result = await getAllIngretions(food, school.category, foodType.boarders);
+                    const result = await getAllIngretions(food, school.category, foodType);
                     for (const ingretion of result) {
                         if (newFoodType.ingretions[ingretion.id]) {
                             newFoodType.ingretions[ingretion.id].quantity += parseFloat(ingretion.quantity);
@@ -83,7 +84,7 @@ async function calculateIngretions(schools) {
             }
             newSchool.foodTypes.push(newFoodType);
         }
-        output.push(newSchool);
+        output.schools.push(newSchool);
     }
     //const ingretions = Object.entries(ingretionCounts).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
     return output;

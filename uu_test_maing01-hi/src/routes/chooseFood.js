@@ -4,7 +4,6 @@ import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
-import Uu5Forms, { useFormApi } from "uu5g05-forms";
 
 import Calls from "../calls.js";
 import FoodType from "../bricks/chooseFood/foodType.js";
@@ -63,31 +62,10 @@ let ChooseFood = createVisualComponent({
     const { identity } = useSession();
 
     return (
-      <Uu5Forms.Form.Provider
-        onSubmit={(e) => {
-          if (!navigator.onLine) throw new Error("Demo submit error example.");
-          alert("Submitted with values:\n" + JSON.stringify(e.data.value, null, 2));
-          props.onClose();
-        }}
-      >
-        <div>
-          <Uu5Forms.FormRadios
-            name="ado"
-            label="Gender"
-            itemList={[
-              { value: "man", label: "For Man" },
-              { value: "woman", label: "For Woman" },
-            ]}
-            required
-          />
-        </div>
-          <Uu5Forms.SubmitButton>Buy</Uu5Forms.SubmitButton>
       <BackgroundProvider background="dark">
         <Uu5Elements.Tabs type="line" className={Css.Tabs()} itemList={schoolTabs} 
-          actionList={[{icon:'uugds-check', children:'Pokračovať', onClick: ()=>{Calls.generatePDF(FoodCont.getSchools)}}]}/> 
+          actionList={[{icon:'uugds-check', children:'Pokračovať', onClick: ()=>{Calls.generatePDF(FoodCont.getSchools())}}]}/> 
       </BackgroundProvider>
-        
-      </Uu5Forms.Form.Provider>
     );
   },
 });

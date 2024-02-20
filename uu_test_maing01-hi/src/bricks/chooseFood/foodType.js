@@ -198,7 +198,7 @@ const FoodType = createVisualComponent({
           {foodPickers.map(foodPicker => (
             <FoodPicker category={foodPicker.category} subcategories={foodPicker.subcategories} icon={foodPicker.icon} addFood={addFood} />
           ))}
-          <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()}/>
+          <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()} onChange={change => {FoodCont.editBoarders(school, title, change.data.value)}}/>
         </Uu5Elements.ListItem>
         </div>
       </div>
