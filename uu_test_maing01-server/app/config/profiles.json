@@ -70,6 +70,30 @@
         "sysStateList": ["active"],
         "profileList": ["Public"]
       },
+      "user/check": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "user/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "user/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "user/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "user/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "user/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
       "pdf/generate": {
         "sysStateList": ["active"],
         "profileList": ["Public"]

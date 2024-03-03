@@ -112,8 +112,8 @@ const FoodPicker = createVisualComponent({
               <Uu5Elements.ScrollableBox maxHeight="30rem">
                 <Uu5Elements.Grid className={Css.resultGrid()} templateColumns="repeat(1, 1fr)" flow="row" rowGap="0">
                   {data ? (
-                    data.itemList.length > 0 ? data.itemList.map((food) => (
-                      <Uu5Elements.Grid.Item key={food.id} className={Css.item()}>
+                    data.itemList.length > 0 ? data.itemList.map((food, index) => (
+                      <Uu5Elements.Grid.Item key={index} className={Css.item()}>
                         <Uu5Elements.InfoItem title={food.nazov} subtitle={food.kategoria}/>
                         <Uu5Elements.Button icon="uugds-plus" effect="upper" size="xs" colorScheme="blue" onClick={() => {addFood(food, icon); setOpen(false)}}>Pridať</Uu5Elements.Button>
                       </Uu5Elements.Grid.Item>

@@ -15,6 +15,9 @@
         },
         "nutritions": {
           "realization": "dao/NutritionsMongo"
+        },
+        "user": {
+          "realization": "dao/UserMongo"
         }
       }
     }

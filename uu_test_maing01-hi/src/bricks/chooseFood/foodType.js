@@ -1,5 +1,8 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, useCallback, useState } from "uu5g05";
+import Uu5, { createVisualComponent, PropTypes, useCallback, useState } from "uu5g05";
+
+import { UserContext } from "../../components/provider/UserProvider.js";
+import { useContext } from "react";
 
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
@@ -100,34 +103,38 @@ const foodPickers = [
 //@@viewOn:css
 const Css = {
     main: () => Config.Css.css`
-        flex-direction: column;
-        border-radius: 1rem;
-        display: flex;
-        height: 18.5rem;
-        min-width: 20rem;
-        width: fit-content;
-        color: white;
-        margin-top: 1rem;
-        margin: 1rem;
+      flex-direction: column;
+      border-radius: 1rem;
+      display: flex;
+      height: 18.5rem;
+      min-width: 20rem;
+      width: fit-content;
+      margin-top: 1rem;
+      margin: 1rem;
     `,
     header: () => Config.Css.css`
-        background-color: #404040;
-        border-radius: 0.5rem 0.5rem 0 0;
-        text-align: center;
-        flex-basis: 20%
+      border-radius: 0.5rem 0.5rem 0 0;
+      text-align: center;
+      flex-basis: 20%
     `,
 
     body: () => Config.Css.css`
-        background-color: #303030;
-        text-align: center;
-        flex-basis: 60%
+      text-align: center;
+      flex-basis: 60%
     `,
 
     footer: () => Config.Css.css`
-        background-color: #404040;
-        border-radius: 0 0 0.5rem 0.5rem;
-        align-items: center;
-        flex-basis: 20%;
+      border-radius: 0 0 0.5rem 0.5rem;
+      align-items: center;
+      flex-basis: 20%;
+    `,
+
+    items: () => Config.Css.css`
+      border-radius: 0 0 0.5rem 0.5rem;
+      justify-content:
+      space-evenly;
+      padding:0; 
+      height:100%;
     `,
 
     input: () => Config.Css.css`
@@ -166,42 +173,43 @@ const FoodType = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { title, school } = props;
-    //@@viewOff:private
-
+    const userContext = useContext(UserContext);
+    const user = userContext.user;
+    
     const [foods, setFoods] = useState([]);
-
     const addFood = useCallback((food, icon) => {
       setFoods(prevItems => [...prevItems, {icon,nazov:food.nazov}]);
       FoodCont.addFood(school, title, food);
     }, []) // No dependencies
+    //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
     return (
-      <div className={Css.main()}>
-        <div className={Css.header()}>
+      <Uu5Elements.Box className={Css.main()}>
+        <Uu5Elements.Box className={Css.header()} colorScheme={user.preferences.color.value} significance="highlighted">
             <Uu5Elements.Text category={"story"} segment={"heading"} type={"h3"} className={Css.title()}>{title}</Uu5Elements.Text>
-        </div>
+        </Uu5Elements.Box>
         
-        <div className={Css.body()}>
+        <Uu5Elements.Box className={Css.body()} colorScheme={user.preferences.color.value} significance="distinct">
           <Uu5Elements.ScrollableBox maxHeight="11.1rem">
-            {foods.map(food => (
-              <FoodItem type={food.nazov} icon={food.icon}/>
+            {foods.map((food, index) => (
+              <FoodItem key={index} type={food.nazov} icon={food.icon}/>
             ))}
           </Uu5Elements.ScrollableBox>
-        </div>
+        </Uu5Elements.Box>
 
-        <div className={Css.footer()}>
-        <Uu5Elements.ListItem className={Config.Css.css`padding:0; padding:0rem; height:100%; justify-content: space-evenly;`} colorScheme="building" significance="subdued">
-          {foodPickers.map(foodPicker => (
-            <FoodPicker category={foodPicker.category} subcategories={foodPicker.subcategories} icon={foodPicker.icon} addFood={addFood} />
-          ))}
-          <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()} onChange={change => {FoodCont.editBoarders(school, title, change.data.value)}}/>
-        </Uu5Elements.ListItem>
-        </div>
-      </div>
+        <Uu5Elements.Box className={Css.footer()} colorScheme={user.preferences.color.value} significance="highlighted">
+          <Uu5Elements.ListItem className={Css.items()}>
+            {foodPickers.map((foodPicker, index) => (
+              <FoodPicker key={index} category={foodPicker.category} subcategories={foodPicker.subcategories} icon={foodPicker.icon} addFood={addFood} />
+            ))}
+            <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()} onChange={change => {FoodCont.editBoarders(school, title, change.data.value)}} colorScheme={user.preferences.color.value} />
+          </Uu5Elements.ListItem>
+        </Uu5Elements.Box>
+      </Uu5Elements.Box>
     );
     //@@viewOff:render
   },

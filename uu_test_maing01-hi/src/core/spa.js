@@ -1,8 +1,10 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, BackgroundProvider } from "uu5g05";
+import { createVisualComponent, Utils, AppBackgroundProvider } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
+
+import { UserProvider } from "../components/provider/UserProvider.js";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
@@ -23,7 +25,7 @@ const ROUTE_MAP = {
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props}/>,
-  chooseFood: (props) => <ChooseFood {...props}/>,
+  chooseFood: (props) => <UserProvider><ChooseFood {...props}/></UserProvider>,
   editNorms: (props) => <EditNorms {...props}/>,
   stats: (props) => <Stats {...props}/>,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
@@ -59,7 +61,7 @@ const Spa = createVisualComponent({
   },
   //@@viewOff:defaultProps
 
-  render() {
+  render(props) {
     //@@viewOn:private
     //@@viewOff:private
 
@@ -70,9 +72,9 @@ const Spa = createVisualComponent({
     return (
       <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
         <Uu5Elements.ModalBus>
-          <BackgroundProvider background="soft">
+          <AppBackgroundProvider>
             <Plus4U5App.Spa routeMap={ROUTE_MAP}/>
-          </BackgroundProvider>
+          </AppBackgroundProvider>
         </Uu5Elements.ModalBus>
       </Plus4U5.SpaProvider>
     );

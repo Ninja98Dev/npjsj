@@ -31,6 +31,18 @@ const Calls = {
     return Calls.call("post", commandUri, dtoInData);
   },
 
+  // Get user preferences from db / register user in db
+  checkUser(dtoInData) {
+    const commandUri = Calls.getCommandUri("user/check");
+    return Calls.call("post", commandUri, dtoInData);
+  },
+
+  // Update user preferences in db
+  updateUser(dtoInData){
+    const commandUri = Calls.getCommandUri("user/update");
+    return Calls.call("post", commandUri, dtoInData);
+  },
+
   serachInFood(dtoIn){
     const commandUri = Calls.getCommandUri("food/list");
     return Calls.call("get", commandUri, dtoIn);

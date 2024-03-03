@@ -29,6 +29,8 @@
 
     
 
+    <script src="react-refresh-runtime.js"></script>
+
     <script>
       (function () {
         if (window.Uu5Loader) {
@@ -53,7 +55,8 @@
             "imports": {
               "create-react-class": "<%=cdnBaseUri%>libs/create-react-class/15.7.0/create-react-class.js",
               "prop-types": "<%=cdnBaseUri%>libs/prop-types/15.7.2/prop-types.js",
-              "react": "<%=cdnBaseUri%>libs/react/16.14.0/react.js",
+              "react": "<%=cdnBaseUri%>libs/react/18.2.0/react.js",
+              "react-dom": "<%=cdnBaseUri%>libs/react-dom/18.2.0/react-dom.js",
               "uu5dndg01": "<%=cdnBaseUri%>uu-uu5dndg01/1.0.0/uu5dndg01.js",
               "uu5g04": "<%=cdnBaseUri%>uu-uu5g04/1.0.0/uu5g04.js",
               "uu5g04-block-layout": "<%=cdnBaseUri%>uu-uu5g04/1.0.0/uu5g04-block-layout.js",
@@ -80,13 +83,7 @@
               "uu_plus4u5g02-elements": "<%=cdnBaseUri%>uu-plus4u5g02/1.0.0/uu_plus4u5g02-elements.js"
             }
           };
-          var bundledConfigExplicit = {
-            "imports": {
-              "react-dom": "./hot-loader-react-dom.js",
-              "hot-loader-react-common": "./hot-loader-react-common.js",
-              "react-hot-loader": "./hot-loader-react-hot-loader.js"
-            }
-          };
+          var bundledConfigExplicit = {};
           Uu5Loader.initUuApp(directDependencyMap, bundledConfig, bundledConfigExplicit);
         }
       })();
@@ -114,11 +111,13 @@
       <script>
         (function () {
           function applySize(mobile) {
-            document.querySelector(".uu-app-loading-svg").setAttribute("viewBox", mobile ? "0 0 144 144" : "0 0 252 252");
+            document.querySelector(".uu-app-loading-svg")?.setAttribute("viewBox", mobile ? "0 0 144 144" : "0 0 252 252");
             var circleEl = document.querySelector(".uu-app-loading-svg circle");
-            circleEl.setAttribute("cx", mobile ? "72" : "126");
-            circleEl.setAttribute("cy", mobile ? "72" : "126");
-            circleEl.setAttribute("r", mobile ? "69" : "123");
+            if (circleEl) {
+              circleEl.setAttribute("cx", mobile ? "72" : "126");
+              circleEl.setAttribute("cy", mobile ? "72" : "126");
+              circleEl.setAttribute("r", mobile ? "69" : "123");
+            }
           }
           var media = window.matchMedia("screen and (min-width: 481px)");
           media.onchange = (e) => applySize(!e.matches);

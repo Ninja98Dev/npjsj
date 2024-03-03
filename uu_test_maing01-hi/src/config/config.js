@@ -3,9 +3,11 @@
 import { Utils } from "uu5g05";
 
 const TAG = "UuTest.";
+const colorScheme = "green";
 
 export default {
   TAG,
+  colorScheme,
   Css: Utils.Css.createCssModule(
     TAG.replace(/\.$/, "")
       .toLowerCase()

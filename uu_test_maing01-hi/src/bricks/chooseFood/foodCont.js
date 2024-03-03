@@ -80,4 +80,4 @@ exports.editBoarders = function(schoolName, foodTypeTitle, boarders){
     }
 }
 
-exports.getSchools = function(){return schools};
+exports.getSchools = function(){return schools;};

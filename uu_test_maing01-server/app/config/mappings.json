@@ -81,6 +81,31 @@
         "httpMethod": "GET",
         "type": "CMD"
       },
+      "user/check": {
+        "realization": "api/controllers/UserController.check",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "user/create": {
+        "realization": "api/controllers/UserController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "user/get": {
+        "realization": "api/controllers/UserController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "user/update": {
+        "realization": "api/controllers/UserController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "user/delete": {
+        "realization": "api/controllers/UserController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
       "pdf/generate":{
         "realization": "api/controllers/PdfController.generate",
         "httpMethod": "GET",

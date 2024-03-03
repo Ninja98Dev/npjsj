@@ -4,6 +4,7 @@ import { withRoute } from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
+import NavBar from "../components/main/navbar";
 
 import Calls from "../calls.js";
 import FoodType from "../bricks/chooseFood/foodType.js";
@@ -12,17 +13,14 @@ import FoodCont from "../bricks/chooseFood/foodCont.js";
 const Css = {
   panel: () =>
     Config.Css.css`
-      background-image: url(${"../assets/images/menu/bg.jpg"});
-      background-position: center;
-      background-size: cover;
       position: absolute;
+      left: 0;
       width: 100%;
       height: 100%;
+      margin-top: 0.1rem;
     `,
   grid: () =>
     Config.Css.css`
-      background-color: rgba(0, 0, 0, 0.7);
-
       justify-content: center;
       align-items: center;
       display: flex;
@@ -35,7 +33,8 @@ const Css = {
     `,  
   Tabs: () =>
     Config.Css.css`
-      background-color: rgb(50, 50, 50);
+      width: 100%;
+      margin-top: -0.3rem;
     `
 };
 
@@ -45,8 +44,8 @@ for(let i=0;i<schools.length;i++){
     schoolTabs.push({label:schools[i].name, children:(
       <div className={Css.panel()}>
         <div className={Css.grid()}>
-          {schools[i].foodTypes.map(type =>(
-              <FoodType title={type.title} school={schools[i].name}/>
+          {schools[i].foodTypes.map((type, index) =>(
+              <FoodType key={index} title={type.title} school={schools[i].name}/>
             ))}
         </div>
       </div>
@@ -62,13 +61,14 @@ let ChooseFood = createVisualComponent({
     const { identity } = useSession();
 
     return (
-      <BackgroundProvider background="dark">
-        <Uu5Elements.Tabs type="line" className={Css.Tabs()} itemList={schoolTabs} 
-          actionList={[{icon:'uugds-check', children:'Pokračovať', onClick: ()=>{Calls.generatePDF(FoodCont.getSchools())}}]}/> 
-      </BackgroundProvider>
+      <NavBar children={
+        <Uu5Elements.Tabs type="card-outer" className={Css.Tabs()} itemList={schoolTabs} 
+          actionList={[{icon:'uugds-check', children:'Generovať', onClick: ()=>{Calls.generatePDF(FoodCont.getSchools())}}]}/>
+      }/>
     );
   },
 });
+
 
 ChooseFood = withRoute(ChooseFood, { authenticated: true });
 export { ChooseFood };
