@@ -108,7 +108,7 @@
       },
       "pdf/generate":{
         "realization": "api/controllers/PdfController.generate",
-        "httpMethod": "GET",
+        "httpMethod": "POST",
         "type": "CMD"
       }
     }

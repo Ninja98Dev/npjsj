@@ -43,7 +43,7 @@ class FoodAbl {
     let validationResult = this.validator.validate("foodGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Get.InvalidDtoIn);
 
-    let food = await this.dao.get(awid, dtoIn.id);
+    let food = await this.dao.get(dtoIn);
 
     if (!food){
       throw new Errors.Get.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});

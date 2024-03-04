@@ -7,19 +7,13 @@ class IngretionsMongo extends UuObjectDao {
   }
 
   /*GET*/
-  async get(kod){
-    let filter = {
-      kod: kod
-    };
-    return await super.findOne(filter);
+  async get(dtoIn){
+    return await super.findOne(dtoIn);
   }
 
   /*LIST*/
   async list(dtoIn){
-    let filter = {
-      kod: Number(dtoIn.kod)
-    };
-    return await super.find(filter);
+    return await super.find(dtoIn);
   }
 
 }

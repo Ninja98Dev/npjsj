@@ -4,6 +4,7 @@ const ingretionsGetDtoInType = shape({
 });
 
 const ingretionsListDtoInType = shape({
+    _id: string(30),
     id: string(10),
     kod: string(5),
     nazov: string(100),

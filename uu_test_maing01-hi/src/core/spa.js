@@ -5,6 +5,7 @@ import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
 
 import { UserProvider } from "../components/provider/UserProvider.js";
+import { SchoolProvider } from "../components/provider/SchoolProvider.js";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
@@ -19,15 +20,17 @@ const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-w
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 const EditNorms = Utils.Component.lazy(() => import("../routes/editNorms.js"));
 const Stats = Utils.Component.lazy(() => import("../routes/stats.js"));
+const FoodPDF = Utils.Component.lazy(() => import("../bricks/chooseFood/foodPDF.js"));
 
 const ROUTE_MAP = {
   "": { redirect: "menu" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props}/>,
-  chooseFood: (props) => <UserProvider><ChooseFood {...props}/></UserProvider>,
+  chooseFood: (props) => <UserProvider><SchoolProvider><ChooseFood {...props}/></SchoolProvider></UserProvider>,
   editNorms: (props) => <EditNorms {...props}/>,
   stats: (props) => <Stats {...props}/>,
+  foodPDF: (props) => <SchoolProvider><FoodPDF {...props}/></SchoolProvider>,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (

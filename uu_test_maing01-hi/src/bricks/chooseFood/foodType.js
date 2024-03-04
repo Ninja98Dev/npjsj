@@ -2,12 +2,12 @@
 import Uu5, { createVisualComponent, PropTypes, useCallback, useState } from "uu5g05";
 
 import { UserContext } from "../../components/provider/UserProvider.js";
+import { SchoolContext } from "../../components/provider/SchoolProvider.js";
 import { useContext } from "react";
 
 import Config from "../config/config.js";
 import Uu5Elements, { Number } from "uu5g05-elements";
 
-import FoodCont from './foodCont.js';
 import FoodPicker from "./foodPicker.js";
 import FoodItem from "./foodItem.js";
 //@@viewOff:imports
@@ -173,13 +173,15 @@ const FoodType = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { title, school } = props;
+
+    const schoolContext = useContext(SchoolContext);
     const userContext = useContext(UserContext);
     const user = userContext.user;
     
     const [foods, setFoods] = useState([]);
     const addFood = useCallback((food, icon) => {
       setFoods(prevItems => [...prevItems, {icon,nazov:food.nazov}]);
-      FoodCont.addFood(school, title, food);
+      schoolContext.addFood(school, title, food);
     }, []) // No dependencies
     //@@viewOff:private
 
@@ -206,7 +208,7 @@ const FoodType = createVisualComponent({
             {foodPickers.map((foodPicker, index) => (
               <FoodPicker key={index} category={foodPicker.category} subcategories={foodPicker.subcategories} icon={foodPicker.icon} addFood={addFood} />
             ))}
-            <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()} onChange={change => {FoodCont.editBoarders(school, title, change.data.value)}} colorScheme={user.preferences.color.value} />
+            <Uu5Elements.Input effect="upper" width={"3rem"} placeholder="0" className={Css.input()} onChange={change => {schoolContext.editBoarders(school, title, change.data.value)}} colorScheme={user.preferences.color.value} />
           </Uu5Elements.ListItem>
         </Uu5Elements.Box>
       </Uu5Elements.Box>

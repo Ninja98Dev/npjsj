@@ -50,7 +50,7 @@ const Calls = {
 
   generatePDF(dtoInData){
     const commandUri = Calls.getCommandUri("pdf/generate");
-    return Calls.call("get", commandUri, dtoInData);
+    return Calls.call("post", commandUri, dtoInData);
   },
 
   async initAndGetWorkspace(dtoInData) {

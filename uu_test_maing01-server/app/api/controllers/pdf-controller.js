@@ -3,10 +3,10 @@
 class PdfController {
     
     async generate(data) {
-        const schools = data.getDtoIn()[''];
+        const schools = JSON.parse(data.getDtoIn());
         const output = await calculateIngretions(schools);
-        //console.log(...output);
-        console.log(...output);
+
+        return JSON.stringify(output.schools);
     }
 
 }
@@ -47,17 +47,28 @@ async function getAllIngretions(food, category, foodType){
             }
 
             const newIngretion = {
-                id: ingretion.id,
-                mj: ingretion.mj,
                 name: ingretion.nazov,
-                quantity: quantity
+                quantity: quantity,
+                mj: ingretion.mj
             };
             ingretions.push(newIngretion);
         });
+
         resolve(ingretions);
-        // obkejt s {id, mnozstvo}
     });
 }
+
+async function getRecipe(dtoIn){
+    return new Promise(async (resolve) => {
+        let daoFood = await FoodAbl.get(awid, dtoIn);
+        const recipe = {
+            nazov: daoFood.nazov,
+            postup: daoFood.postup
+        }
+        resolve(recipe);
+    });
+}
+
 async function calculateIngretions(schools) {
     const output = {schools:[]};
     for (const school of schools) {
@@ -68,25 +79,32 @@ async function calculateIngretions(schools) {
         for (const foodType of school.foodTypes) {
             let newFoodType = {
                 title: foodType.title,
-                ingretions: []
+                ingretions: [],
+                recipes: []
             }
             if(foodType.foods && foodType.foods.length > 0){
                 for (const food of foodType.foods) {
+                    const recipe = await getRecipe(food);
                     const result = await getAllIngretions(food, school.category, foodType);
+                    //console.log(result);
+                    let ingretions = [];
                     for (const ingretion of result) {
-                        if (newFoodType.ingretions[ingretion.id]) {
-                            newFoodType.ingretions[ingretion.id].quantity += parseFloat(ingretion.quantity);
+                        if (ingretions[ingretion.name]) {
+                            ingretions[ingretion.name].quantity += parseFloat(ingretion.quantity);
                         } else {
-                            newFoodType.ingretions[ingretion.id] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj, name:ingretion.name};
+                            ingretions[ingretion.name] = {quantity:parseFloat(ingretion.quantity), mj:ingretion.mj};
                         }
                     }
+                    
+                    //ingretions = Object.entries(ingretions.length).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
+                    newFoodType.recipes.push(recipe);
+                    newFoodType.ingretions = ingretions;
                 }
             }
             newSchool.foodTypes.push(newFoodType);
         }
         output.schools.push(newSchool);
     }
-    //const ingretions = Object.entries(ingretionCounts).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
     return output;
   }
 

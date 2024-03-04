@@ -1,14 +1,17 @@
 //@@viewOn:imports
-import { BackgroundProvider, createVisualComponent, useSession, useEffect } from "uu5g05";
+import { createVisualComponent, useSession, useState } from "uu5g05";
 import { withRoute } from "uu_plus4u5g02-app";
 
+import { SchoolContext } from "../components/provider/SchoolProvider.js";
+import { useContext } from "react";
+
+import {FoodPDF} from "../bricks/chooseFood/foodPDF.js";
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
 import NavBar from "../components/main/navbar";
-
 import Calls from "../calls.js";
+
 import FoodType from "../bricks/chooseFood/foodType.js";
-import FoodCont from "../bricks/chooseFood/foodCont.js";
 
 const Css = {
   panel: () =>
@@ -16,7 +19,7 @@ const Css = {
       position: absolute;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: fit-content;
       margin-top: 0.1rem;
     `,
   grid: () =>
@@ -35,21 +38,12 @@ const Css = {
     Config.Css.css`
       width: 100%;
       margin-top: -0.3rem;
-    `
-};
-
-const schools = FoodCont.getSchools();
-let schoolTabs = [];
-for(let i=0;i<schools.length;i++){
-    schoolTabs.push({label:schools[i].name, children:(
-      <div className={Css.panel()}>
-        <div className={Css.grid()}>
-          {schools[i].foodTypes.map((type, index) =>(
-              <FoodType key={index} title={type.title} school={schools[i].name}/>
-            ))}
-        </div>
-      </div>
-    )});
+    `,
+  temp: () => Config.Css.css`
+  background-color: white;
+  color:black;
+  margin-top: 50rem;
+  `
 }
 
 let ChooseFood = createVisualComponent({
@@ -60,12 +54,45 @@ let ChooseFood = createVisualComponent({
   render(props) {
     const { identity } = useSession();
 
-    return (
+    const schoolContext = useContext(SchoolContext);
+    const schools = schoolContext.schools;
+    const schoolsFinal = schoolContext.pdfData;
+    /*
+    const [schoolsFinal, setSchoolsFinal] = useState(undefined);
+    if(!schoolsFinal){
+        Calls.generatePDF(JSON.stringify(schools)).then((e) => {
+          console.log(e);
+            let array = [];
+            array.push(e[0]);
+            array.push(e[1]);
+            setSchoolsFinal(array);
+        });
+    }
+    */
+    let schoolTabs = [];
+    for(let i=0;i<schools.length;i++){
+        schoolTabs.push({label:schools[i].name, children:(
+          <div className={Css.panel()}>
+            <div className={Css.grid()}>
+              {schools[i].foodTypes.map((type, index) =>(
+                  <FoodType key={index} title={type.title} school={schools[i].name}/>
+                ))}
+            </div>
+          </div>
+        )});
+    }
+
+    return (<div>
       <NavBar children={
         <Uu5Elements.Tabs type="card-outer" className={Css.Tabs()} itemList={schoolTabs} 
-          actionList={[{icon:'uugds-check', children:'Generovať', onClick: ()=>{Calls.generatePDF(FoodCont.getSchools())}}]}/>
+          actionList={[{icon:'uugds-check', children:'Generovať', onClick: ()=>{schoolContext.generatePDF()}}]}/>
       }/>
-    );
+      {!schoolsFinal ? (<div><p>Loading...</p></div>) : (
+        <div className={Css.temp()}>
+          <FoodPDF schools={schoolsFinal} />
+        </div>
+      )}
+    </div>);
   },
 });
 

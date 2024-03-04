@@ -21,7 +21,7 @@ class IngretionsAbl {
     let validationResult = this.validator.validate("ingretionsGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, Errors.Get.InvalidDtoIn);
 
-    let ingretion = await this.dao.get(dtoIn.kod);
+    let ingretion = await this.dao.get(dtoIn);
 
     if (!ingretion){
       throw new Errors.Get.IngretionDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});

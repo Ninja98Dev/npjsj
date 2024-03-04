@@ -10,12 +10,8 @@ class FoodMongo extends UuObjectDao {
   }
 
   /*GET*/
-  async get(awid, id){
-    let filter = {
-      awid: awid,
-      id: id,
-    };
-    return await super.findOne(filter);
+  async get(dtoIn){
+    return await super.findOne(dtoIn);
   }
 
    /*UPDATE*/
