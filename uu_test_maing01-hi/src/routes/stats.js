@@ -5,6 +5,8 @@ import { withRoute } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Uu5Elements from "uu5g05-elements";
 
+import BackButton from "../bricks/chooseFood/backButton.js";
+
 const Css = {
   icon: () =>
     Config.Css.css({
@@ -27,6 +29,7 @@ let Stats = createVisualComponent({
         justifyContent="center"
         alignContent="center">
             <h1>Štatistiky</h1>
+			<BackButton/>
         </Uu5Elements.Grid>
     );
   },

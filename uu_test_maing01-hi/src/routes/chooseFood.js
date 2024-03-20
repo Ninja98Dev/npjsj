@@ -9,6 +9,7 @@ import Uu5Forms from "uu5g05-forms";
 import Calls from "../calls.js";
 import FoodType from "../bricks/chooseFood/foodType.js";
 import FoodCont from "../bricks/chooseFood/foodCont.js";
+import BackButton from "../bricks/chooseFood/backButton.js";
 
 const Css = {
   panel: () =>
@@ -75,6 +76,7 @@ let ChooseFood = createVisualComponent({
           <FoodType title="Olovrant"/>
           <FoodType title="Večera"/>
         </Uu5Elements.Grid>
+		<BackButton/>
       </div>
     );
   },
