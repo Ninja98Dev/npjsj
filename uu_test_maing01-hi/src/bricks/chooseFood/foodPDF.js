@@ -129,6 +129,8 @@ const FoodPDF = createVisualComponent({
     //@@viewOn:private
     const { schools } = props;
 
+    console.log(schools);
+
     //@@viewOff:private
 
     //@@viewOn:interface

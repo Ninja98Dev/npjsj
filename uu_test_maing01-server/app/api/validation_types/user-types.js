@@ -1,6 +1,11 @@
 /* eslint-disable */
 const userCheckDtoInType = shape({
-    id: string(20).isRequired()
+    id: string(20).isRequired(),
+    name: string(50),
+    preferences: shape({
+        theme: string(20),
+        color: shape()
+    })
 });
 
 const userCreateDtoInType = shape({

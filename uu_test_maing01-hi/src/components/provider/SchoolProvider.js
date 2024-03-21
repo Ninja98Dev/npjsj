@@ -1,4 +1,4 @@
-import { useState } from "uu5g05";
+import { useRoute, useState } from "uu5g05";
 import { createContext } from "react";
 import Calls from "../../calls";
 
@@ -62,6 +62,7 @@ const defaultSchools = [
 ];
 
 export const SchoolProvider = ({ children }) => {
+  const [route, setRoute] = useRoute();
   const [schools, setSchools] = useState(defaultSchools);
   const [pdfData, setPdfData] = useState(undefined);
 
@@ -96,8 +97,9 @@ export const SchoolProvider = ({ children }) => {
       let array = [];
       array.push(data[0]);
       array.push(data[1]);
-      setPdfData(data);
-      console.log(data);
+
+      console.log(typeof data);
+      setRoute('foodPDF', {schools: data});
     });
   }
     

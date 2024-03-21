@@ -87,11 +87,6 @@ let ChooseFood = createVisualComponent({
         <Uu5Elements.Tabs type="card-outer" className={Css.Tabs()} itemList={schoolTabs} 
           actionList={[{icon:'uugds-check', children:'Generovať', onClick: ()=>{schoolContext.generatePDF()}}]}/>
       }/>
-      {!schoolsFinal ? (<div><p>Loading...</p></div>) : (
-        <div className={Css.temp()}>
-          <FoodPDF schools={schoolsFinal} />
-        </div>
-      )}
     </div>);
   },
 });

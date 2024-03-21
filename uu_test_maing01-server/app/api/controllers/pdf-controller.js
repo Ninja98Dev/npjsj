@@ -6,7 +6,8 @@ class PdfController {
         const schools = JSON.parse(data.getDtoIn());
         const output = await calculateIngretions(schools);
 
-        return JSON.stringify(output.schools);
+        console.log(typeof output instanceof Array);
+        return output.schools;
     }
 
 }
@@ -70,7 +71,7 @@ async function getRecipe(dtoIn){
 }
 
 async function calculateIngretions(schools) {
-    const output = {schools:[]};
+    const output = [];
     for (const school of schools) {
         let newSchool = {
             name: school.name,
@@ -103,7 +104,7 @@ async function calculateIngretions(schools) {
             }
             newSchool.foodTypes.push(newFoodType);
         }
-        output.schools.push(newSchool);
+        output.push(newSchool);
     }
     return output;
   }

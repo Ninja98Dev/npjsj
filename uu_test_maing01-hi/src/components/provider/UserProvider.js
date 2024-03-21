@@ -1,10 +1,11 @@
 import { useAppBackground, useSession, useState, useEffect } from "uu5g05";
+import { withRoute } from "uu_plus4u5g02-app";
 import { createContext } from "react";
 import Calls from "../../calls";
 
 export const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+let UserProvider = ({ children }) => {
     const { identity } = useSession();
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
@@ -12,7 +13,7 @@ export const UserProvider = ({ children }) => {
 
     useEffect(
         () => {
-          Calls.checkUser({id: identity.uuIdentity}).then((data)=>{
+          Calls.checkUser({id: identity.uuIdentity, name: identity.name}).then((data)=>{
             
             // set background color
             const darkMode = data.user.preferences.theme === "#ffffff";
@@ -30,3 +31,6 @@ export const UserProvider = ({ children }) => {
       {loading ? (<h1/>) : <UserContext.Provider value={{user, setUser}}>{children}</UserContext.Provider>}
     </div>
 };
+
+UserProvider = withRoute(UserProvider, { authenticated: true });
+export { UserProvider };
