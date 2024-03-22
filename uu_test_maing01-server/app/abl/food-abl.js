@@ -20,10 +20,7 @@ class FoodAbl {
   /* CREATE */
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("foodCreateDtoInType", dtoIn);
-
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Create.InvalidDtoIn);
-  
-    console.log(dtoIn);
 
     let foodResult;
     try{
@@ -42,7 +39,7 @@ class FoodAbl {
   async get(awid, dtoIn, uuAppErrorMap ={}) {
     let validationResult = this.validator.validate("foodGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Get.InvalidDtoIn);
-
+    
     let food = await this.dao.get(dtoIn);
 
     if (!food){
@@ -59,8 +56,8 @@ class FoodAbl {
   async update(awid, dtoIn, uuAppErrorMap ={}) {
     let validationResult = this.validator.validate("foodUpdateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Update.InvalidDtoIn);
-
-    let food = await this.dao.get(awid,dtoIn.id);
+    
+    let food = await this.dao.get(awid, dtoIn);
     
     if(!food){
       throw new Errors.Update.FoodDoesNotExist({uuAppErrorMap}, {jokeId: dtoIn.id});

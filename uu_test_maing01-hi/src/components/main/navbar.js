@@ -43,13 +43,15 @@ const ModalOnButton = createComponent({
 const ThemeToggle = createVisualComponent({
     uu5Tag: "ThemeToggle",
 
-    propTypes: {user: PropTypes.object},
-    defaultProps: {user: null},
+    propTypes: {},
+    defaultProps: {},
   
-    render(props) {
-      const { user } = props;
+    render() {
       const [background, setBackground] = useAppBackground();
       const darkMode = background === "dark";
+
+      const userContext = useContext(UserContext);
+      const user = userContext.user;
 
       const Css = {
         main: () => Config.Css.css`
@@ -83,11 +85,11 @@ const ThemeToggle = createVisualComponent({
 });
 
 const PrimaryColor = createVisualComponent({
-    propTypes: {user: PropTypes.object},
-    defaultProps: {user: null},
-    render(props){
-        const { user } = props;
+    propTypes: {},
+    defaultProps: {},
+    render(){
         const userContext = useContext(UserContext);
+        const user = userContext.user;
 
         const Css =  {
             main: () => Config.Css.css`
@@ -116,9 +118,9 @@ const PrimaryColor = createVisualComponent({
                       typeof onSelect === "function" && onSelect(e);
                       setColor(e.data.value);
 
-                      userContext.user.preferences.color = e.data;
-                      userContext.setUser({...userContext.user});
-                      Calls.updateUser({...userContext.user});
+                      user.preferences.color = e.data;
+                      userContext.setUser({...user});
+                      Calls.updateUser({...user});
                     }}
                   />
                 </div>
@@ -142,11 +144,13 @@ const PrimaryColor = createVisualComponent({
 const NavUser = createVisualComponent({
     uu5Tag: "NavUser",
 
-    propTypes: { user: PropTypes.object },
-    defaultProps: { user: null },
+    propTypes: {},
+    defaultProps: {},
   
-    render(props) {
-        const { user } = props;
+    render() {
+      const userContext = useContext(UserContext);
+      const user = userContext.user;
+
         const Css = {
             main: () => Config.Css.css`
                 display: flex;
@@ -181,8 +185,8 @@ const NavUser = createVisualComponent({
                     <Uu5Elements.Text className={Css.name()} category="interface" segment="highlight" type="common">{user.name}</Uu5Elements.Text>
                     <ModalOnButton header="Možnosti" width="35rem" children={
                         <Uu5Elements.Box shape="interactiveItem">
-                            <ThemeToggle user={user} />
-                            <PrimaryColor user={user} />
+                            <ThemeToggle />
+                            <PrimaryColor />
                         </Uu5Elements.Box>
                     } />
                 </div>
@@ -263,7 +267,8 @@ const NavBar = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    return (
+    return (<div>
+      {user ? (
         <div className={Css.nav(user)}>
             <Uu5Elements.Svg 
                 uri={user.preferences.theme !== "#ffffff" ? "assets/images/logo/dark.png" : "assets/images/logo/light.png"} 
@@ -274,9 +279,10 @@ const NavBar = createVisualComponent({
                     {children}
                 </div> 
             : null}
-            <NavUser user={user} />
+            <NavUser />
         </div>
-    );
+    ): (<div></div>)}
+    </div>)
     //@@viewOff:render
   },
 });
@@ -285,3 +291,23 @@ const NavBar = createVisualComponent({
 export { NavBar };
 export default NavBar;
 //@@viewOff:exports
+
+
+/*
+
+return (
+        <div className={Css.nav(user)}>
+            <Uu5Elements.Svg 
+                uri={user.preferences.theme !== "#ffffff" ? "assets/images/logo/dark.png" : "assets/images/logo/light.png"} 
+                className={Css.logo()}
+                type="img" />
+            {children ? 
+                <div className={Css.children(user)}>
+                    {children}
+                </div> 
+            : null}
+            <NavUser />
+        </div>
+    );
+
+*/

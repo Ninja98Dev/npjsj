@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { PropTypes, createVisualComponent, useState } from "uu5g05";
+import { PropTypes, createVisualComponent, useRoute, useState } from "uu5g05";
 
 import { SchoolContext } from "../../components/provider/SchoolProvider.js";
 import { useContext } from "react";
@@ -118,18 +118,23 @@ const FoodPDF = createVisualComponent({
   //@@viewOff:statics
 
   //@@viewOn:propTypes
-  propTypes: {schools: PropTypes.array},
+  propTypes: {},
   //@@viewOff:propTypes
 
   //@@viewOn:defaultProps
-  defaultProps: {schools: undefined},
+  defaultProps: {},
   //@@viewOff:defaultProps
 
   render(props) {
     //@@viewOn:private
-    const { schools } = props;
+    const {} = props;
 
-    console.log(schools);
+    const [route, setRoute] = useRoute();
+
+    let schools;
+    if(route.params.schools){
+        schools = JSON.parse(route.params.schools);
+    }
 
     //@@viewOff:private
 
@@ -138,7 +143,7 @@ const FoodPDF = createVisualComponent({
 
     //@@viewOn:render
     return (<div>
-        { !schools ? (<div><p>Loading...</p></div>) : schools.map((school, index) => (
+        { !schools ? (<div><h1>Error: Data not found</h1></div>) : schools.map((school, index) => (
             <div key={index} className={Css.ramcek()}>
                 <div className={Css.pdf()}>
                     <div className={Css.header()}>
@@ -154,7 +159,9 @@ const FoodPDF = createVisualComponent({
                             <div className={Css.p1_body()}>
                                 <div className={Css.Ingrediencie()}>
                                     <h3>Ingerdiencie:</h3>
-                                    {console.log(foodType)}
+                                    {Object.keys(foodType.ingretions).forEach((key, index) => (
+                                        <p>a</p>
+                                    ))}
                                 </div>
                                 <div className={Css.Postup()}>
                                     <h3>Postupy:</h3>

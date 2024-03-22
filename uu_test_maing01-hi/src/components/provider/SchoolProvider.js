@@ -64,7 +64,7 @@ const defaultSchools = [
 export const SchoolProvider = ({ children }) => {
   const [route, setRoute] = useRoute();
   const [schools, setSchools] = useState(defaultSchools);
-  const [pdfData, setPdfData] = useState(undefined);
+  const [pdfData, setPdfData] = useState();
 
   function addFood(schoolName, foodTypeTitle, food){
     const school = schools.find(school => school.name === schoolName);
@@ -94,12 +94,7 @@ export const SchoolProvider = ({ children }) => {
   function generatePDF(){
     const dtoIn = JSON.stringify(schools);
     Calls.generatePDF(dtoIn).then((data) => {
-      let array = [];
-      array.push(data[0]);
-      array.push(data[1]);
-
-      console.log(typeof data);
-      setRoute('foodPDF', {schools: data});
+      setRoute('foodpdf', {schools: data});
     });
   }
     

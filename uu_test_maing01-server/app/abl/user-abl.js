@@ -31,14 +31,13 @@ class UserAbl {
         dtoIn = {
           ...dtoIn,
           preferences:{
-            theme: "dark",
+            theme: "#212121",
             color: {
               value: "light-blue",
               cssColor: "linear-gradient(135deg, #4FC3F7 0%, #0288D1 100%)"
             }
           }
         }
-        console.log(dtoIn);
         user = await this.dao.create(dtoIn);
       }
     }catch(e){

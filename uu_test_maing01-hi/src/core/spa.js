@@ -30,12 +30,12 @@ const ROUTE_MAP = {
   chooseFood: (props) => <UserProvider><SchoolProvider><ChooseFood {...props}/></SchoolProvider></UserProvider>,
   editNorms: (props) => <EditNorms {...props}/>,
   stats: (props) => <Stats {...props}/>,
-  foodPDF: (props) => <SchoolProvider><FoodPDF {...props}/></SchoolProvider>,
+  foodpdf: (props) => <SchoolProvider><FoodPDF {...props}/></SchoolProvider>,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (
     <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found ha
+      Page Not Found
     </Uu5Elements.Text>
   ),
 };

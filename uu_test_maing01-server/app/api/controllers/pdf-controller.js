@@ -5,9 +5,9 @@ class PdfController {
     async generate(data) {
         const schools = JSON.parse(data.getDtoIn());
         const output = await calculateIngretions(schools);
-
-        console.log(typeof output instanceof Array);
-        return output.schools;
+ 
+        const outputJSON = JSON.stringify(output);
+        return outputJSON;
     }
 
 }
@@ -87,7 +87,7 @@ async function calculateIngretions(schools) {
                 for (const food of foodType.foods) {
                     const recipe = await getRecipe(food);
                     const result = await getAllIngretions(food, school.category, foodType);
-                    //console.log(result);
+
                     let ingretions = [];
                     for (const ingretion of result) {
                         if (ingretions[ingretion.name]) {
@@ -99,7 +99,7 @@ async function calculateIngretions(schools) {
                     
                     //ingretions = Object.entries(ingretions.length).map(([id, {quantity, mj, name}]) => ({ id, quantity: parseFloat(quantity.toFixed(3)), mj, name}));
                     newFoodType.recipes.push(recipe);
-                    newFoodType.ingretions = ingretions;
+                    newFoodType.ingretions = Object.assign({}, ingretions);;
                 }
             }
             newSchool.foodTypes.push(newFoodType);
