@@ -159,8 +159,8 @@ const FoodPDF = createVisualComponent({
                             <div className={Css.p1_body()}>
                                 <div className={Css.Ingrediencie()}>
                                     <h3>Ingerdiencie:</h3>
-                                    {Object.keys(foodType.ingretions).forEach((key, index) => (
-                                        <p>a</p>
+                                    {Object.keys(foodType.ingretions).map((key, index) => (
+                                        <p key={index}>{index+1}. {key}: {foodType.ingretions[key].quantity}{foodType.ingretions[key].mj}</p>
                                     ))}
                                 </div>
                                 <div className={Css.Postup()}>

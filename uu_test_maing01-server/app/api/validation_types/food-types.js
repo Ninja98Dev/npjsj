@@ -10,7 +10,7 @@ const foodCreateDtoInType = shape({
 });
 
 const foodGetDtoInType = shape({
-    kod: integer().isRequired()
+    kod: string().isRequired()
 });
 
 const foodUpdateDtoInType = shape({

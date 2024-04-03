@@ -40,6 +40,10 @@ class FoodAbl {
     let validationResult = this.validator.validate("foodGetDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Get.InvalidDtoIn);
     
+    if(dtoIn.kod){
+      dtoIn.kod = dtoIn.kod.toString();
+    }
+
     let food = await this.dao.get(dtoIn);
 
     if (!food){

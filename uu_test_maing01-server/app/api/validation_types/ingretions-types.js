@@ -1,11 +1,11 @@
 /* eslint-disable */
 const ingretionsGetDtoInType = shape({
-    kod: integer().isRequired()
+    kod: string().isRequired()
 });
 
 const ingretionsListDtoInType = shape({
     id: integer(),
-    kod: integer(),
+    kod: string(),
     nazov: string(100),
     norma: string(10),
     kategoria: string(50),

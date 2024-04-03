@@ -32,7 +32,7 @@ class FoodMongo extends UuObjectDao {
     };
     let pageInfo = {
       pageSize : 50
-    }
+    };
     return await super.find(filter, pageInfo);
   }
   
