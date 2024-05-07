@@ -37,14 +37,12 @@ class FoodAbl {
   };
   /*GET*/
   async get(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validator.validate("foodGetDtoInType", dtoIn);
-    uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Get.InvalidDtoIn);
-    
-    if(dtoIn.kod){
-      dtoIn.kod = dtoIn.kod.toString();
-    }
+    //let validationResult = this.validator.validate("foodGetDtoInType", dtoIn);
+    //uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Get.InvalidDtoIn);
 
+    console.log(typeof dtoIn.kod);
     let food = await this.dao.get(dtoIn);
+    console.log(food);
 
     if (!food){
       throw new Errors.Get.FoodDoesNotExist({uuAppErrorMap}, {foodId: dtoIn.id});
@@ -105,8 +103,8 @@ class FoodAbl {
   
   /*LIST*/
   async list(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validator.validate("foodListDtoInType", dtoIn);
-    uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Delete.InvalidDtoIn);
+    //let validationResult = this.validator.validate("foodListDtoInType", dtoIn);
+    //uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, WARNINGS.unsupportedKeys.CODE, Errors.Delete.InvalidDtoIn);
 
     let foodResult;
     try{

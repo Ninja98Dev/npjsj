@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { PropTypes, createVisualComponent, useRoute, useState } from "uu5g05";
+import { PropTypes, createVisualComponent, useRoute, useAppBackground } from "uu5g05";
 
 import { SchoolContext } from "../../components/provider/SchoolProvider.js";
 import { useContext } from "react";
@@ -131,6 +131,9 @@ const FoodPDF = createVisualComponent({
 
     const [route, setRoute] = useRoute();
 
+    const [background, setBackground] = useAppBackground();
+    setBackground({backgroundColor: "#ffffff"});
+
     let schools;
     if(route.params.schools){
         schools = JSON.parse(route.params.schools);
@@ -160,7 +163,7 @@ const FoodPDF = createVisualComponent({
                                 <div className={Css.Ingrediencie()}>
                                     <h3>Ingerdiencie:</h3>
                                     {Object.keys(foodType.ingretions).map((key, index) => (
-                                        <p key={index}>{index+1}. {key}: {foodType.ingretions[key].quantity}{foodType.ingretions[key].mj}</p>
+                                        <p key={index}>{index+1}. <strong>{key}:</strong> {foodType.ingretions[key].quantity.toFixed(2)}{foodType.ingretions[key].mj}</p>
                                     ))}
                                 </div>
                                 <div className={Css.Postup()}>

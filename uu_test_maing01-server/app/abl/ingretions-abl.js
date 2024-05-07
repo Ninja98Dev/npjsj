@@ -35,8 +35,8 @@ class IngretionsAbl {
   
   /*LIST*/
   async list(awid, dtoIn, uuAppErrorMap ={}) {
-    let validationResult = this.validator.validate("ingretionsListDtoInType", dtoIn);
-    uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, Errors.List.InvalidDtoIn);
+    //let validationResult = this.validator.validate("ingretionsListDtoInType", dtoIn);
+    //uuAppErrorMap = ValidationHelper.processValidationResult(dtoIn, validationResult, Errors.List.InvalidDtoIn);
 
     let ingretions;
     try{
